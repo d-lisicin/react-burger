@@ -51,11 +51,11 @@ const BurgerConstructor = () => {
                 />
                 <ul className={styles.list}>
                     {newBurger.map((item, index) => {
-                        return <li className={styles.wrap}>
+                        return <li key={index} className={styles.wrap}>
                         <span className={styles.icon}>
                             <DragIcon type="primary" />
                         </span>
-                            <ConstructorElement key={index} text={item.name} price={item.price} thumbnail={item.image} />
+                            <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} />
                         </li>
                     })}
                 </ul>
