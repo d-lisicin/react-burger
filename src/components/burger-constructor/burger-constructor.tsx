@@ -1,7 +1,6 @@
 import React from 'react';
 import { ConstructorElement, DragIcon, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from "./burger-constructor.module.css";
-import data from '../../utils/data'
 
 /*мок игредиентов которые добавили*/
 const newBurgerArr = [
@@ -28,26 +27,38 @@ const newBurgerArr = [
     }
 ]
 
-const newBurger: ({ _id: string; name: string; type: string; proteins: number; fat: number; carbohydrates: number; calories: number; price: number; image: string; image_mobile: string; image_large: string; __v: number; })[] = []
+const newBurger: ({
+    _id: string; name: string;
+    type: string;
+    proteins: number;
+    fat: number;
+    carbohydrates: number;
+    calories: number;
+    price: number;
+    image: string;
+    image_mobile: string;
+    image_large: string;
+    __v: number;
+})[] = []
 
-/*ищем совпадения и кидаем их в список*/
-newBurgerArr.forEach(e => {
-    const burger = data.find(i => i._id === e._id)
-    if (burger) {
-        newBurger.push(burger)
-    }
-})
+const BurgerConstructor = (props: { data: any }) => {
+    /*ищем совпадения и кидаем их в список*/
+    newBurgerArr.forEach(e => {
+        const burger = props.data.find((i: { _id: string; }) => i._id === e._id)
+        if (burger) {
+            newBurger.push(burger)
+        }
+    })
 
-const BurgerConstructor = () => {
     return (
         <section className={`${styles.section} mt-15`}>
-            <div className='mb-10' style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '15px', paddingRight: '16px' }}>
+            <div className={`${styles.inner} mb-10`}>
                 <ConstructorElement
                     type="top"
                     isLocked={true}
-                    text="Краторная булка N-200i (верх)"
-                    price={200}
-                    thumbnail='https://code.s3.yandex.net/react/code/bun-02.png'
+                    text={`${props.data[0].name} (верх)`}
+                    price={props.data[0].price}
+                    thumbnail={props.data[0].image}
                 />
                 <ul className={styles.list}>
                     {newBurger.map((item, index) => {
@@ -62,9 +73,9 @@ const BurgerConstructor = () => {
                 <ConstructorElement
                     type="bottom"
                     isLocked={true}
-                    text="Краторная булка N-200i (низ)"
-                    price={200}
-                    thumbnail='https://code.s3.yandex.net/react/code/bun-02.png'
+                    text={`${props.data[0].name} (низ)`}
+                    price={props.data[0].price}
+                    thumbnail={props.data[0].image}
                 />
             </div>
             <div className={styles.total}>

@@ -1,14 +1,7 @@
-.list {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .scroll {
-    height: 716px;
+    height: 664px;
     overflow-x: hidden;
     overflow-y: scroll;
-    margin-right: -8px;
-    padding-right: 8px;
 }
 
 .scroll::-webkit-scrollbar {

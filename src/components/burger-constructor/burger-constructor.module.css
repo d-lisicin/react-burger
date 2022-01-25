@@ -2,11 +2,20 @@
   width: 600px;
 }
 
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+  padding-right: 16px;
+}
+
 .list {
   height: 464px;
   overflow-x: hidden;
   overflow-y: scroll;
   margin-right: -16px;
+  padding-left: 35px;
   padding-right: 8px;
 }
 
