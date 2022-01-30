@@ -1,0 +1,46 @@
+.column {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.header {
+    height: 88px;
+    background: #1C1C21;
+    box-shadow: 0 24px 32px rgba(0, 0, 0, 0.04), 0 16px 24px rgba(0, 0, 0, 0.04), 0 4px 8px rgba(0, 0, 0, 0.04), 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.leftColumn {
+    composes: column;
+}
+
+.rightColumn {
+    composes: column;
+    justify-content: flex-end;
+}
+
+.logo {
+    composes: column;
+    justify-content: center;
+    height: 40px;
+    width: auto;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    color: #F2F2F3;
+    text-decoration: none;
+}
+
+.active {
+    color: #8585AD;
+}
