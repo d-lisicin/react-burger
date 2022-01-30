@@ -1,7 +1,10 @@
 import React from 'react';
 import styles from './ingredient-details.module.css'
+import { TIngredientsItem } from "../../utils/types"
 
-const IngredientDetails = (props: any) => {
+const IngredientDetails = (props: {
+    ingredient: TIngredientsItem}) => {
+
     return (
         <div className={styles.wrap}>
             <img className='text text_type_main-medium mb-4' src={props.ingredient.image_large} alt={props.ingredient.name} />
@@ -28,4 +31,4 @@ const IngredientDetails = (props: any) => {
     );
 }
 
-export default IngredientDetails;
+export default IngredientDetails

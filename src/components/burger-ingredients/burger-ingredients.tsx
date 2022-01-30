@@ -2,20 +2,21 @@ import React from 'react'
 import BurgerIngredientsTab from './burger-ingredients-tab/burger-ingredients-tab'
 import BurgerIngredientsContent from './burger-ingredients-content/burger-ingredients-content'
 import Modal from "../modal/modal"
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import IngredientDetails from "../ingredient-details/ingredient-details"
+import { TIngredientsItem } from '../../utils/types'
 import styles from './burger-ingredients.module.css'
 
-const BurgerIngredients = (props: { data: any }) => {
-    const [isShowDetails, setIsShowDetails] = React.useState(false);
-    const [ingredientDetails, setIngredientDetails] = React.useState(null);
+const BurgerIngredients = (props: { data: Array<TIngredientsItem> }) => {
+    const [isShowDetails, setIsShowDetails] = React.useState(false)
+    const [ingredientDetails, setIngredientDetails] = React.useState(null)
 
     const openIngredientDetails = () => {
-        document.body.classList.add('overflow-hidden');
+        document.body.classList.add('overflow-hidden')
         setIsShowDetails(true)
     }
 
     const closeIngredientDetails = () => {
-        document.body.classList.remove('overflow-hidden');
+        document.body.classList.remove('overflow-hidden')
         setIsShowDetails(false)
         setIngredientDetails(null)
     }
@@ -31,7 +32,7 @@ const BurgerIngredients = (props: { data: any }) => {
                     onClick={openIngredientDetails}
                 />
             </section>
-            {isShowDetails &&
+            {isShowDetails && ingredientDetails &&
                 <Modal
                     title='Детали ингредиента'
                     onClick={closeIngredientDetails}

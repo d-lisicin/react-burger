@@ -1,21 +1,23 @@
 import React from 'react'
-import BurgerIngredientsContentItem from "./burger-ingredients-content-item/burger-ingredients-content-item";
+import BurgerIngredientsContentItem from "./burger-ingredients-content-item/burger-ingredients-content-item"
+import { TIngredientsItem } from '../../../utils/types'
 import styles from './burger-ingredients-content.module.css'
 
 const BurgerIngredientsContent = (
     props: {
-        data: { data: any; }
-        onClick: any
-        setIngredient: any
+        data: TIngredientsItem[]
+        setIngredient: React.Dispatch<React.SetStateAction<null>>
+        onClick: () => void
     }) => {
+
     const categories = [
         { type: 'bun', name: 'Булки' },
         { type: 'sauce', name: 'Соусы' },
         { type: 'main', name: 'Начинки' }
     ]
 
-    const elementClick = (e: any) => {
-        props.setIngredient(e)
+    const elementClick = (item: React.SetStateAction<null>) => {
+        props.setIngredient(item)
         props.onClick()
     }
 

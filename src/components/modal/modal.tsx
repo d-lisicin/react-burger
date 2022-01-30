@@ -7,7 +7,7 @@ import styles from './modal.module.css'
 const Modal = (
     props: {
         title: string | React.ReactChild | React.ReactFragment | React.ReactPortal
-        onClick: any
+        onClick: () => void
         children: React.ReactChild | React.ReactFragment | React.ReactPortal
     } ) => {
 
@@ -42,4 +42,4 @@ const Modal = (
     );
 }
 
-export default Modal;
+export default Modal

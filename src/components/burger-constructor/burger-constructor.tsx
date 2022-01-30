@@ -2,6 +2,7 @@ import React from 'react';
 import { ConstructorElement, DragIcon, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from "./burger-constructor.module.css";
 import Modal from "../modal/modal"
+import {TIngredientsItem} from "../../utils/types"
 import OrderDetails from "../order-details/order-details"
 
 /*мок игредиентов которые добавили*/
@@ -15,33 +16,20 @@ const newBurgerArr = [
     { "_id":"60d3b41abdacab0026a733d0" }
 ]
 
-const BurgerConstructor = (props: { data: any }) => {
-    const [isShowOrder, setIsShowOrder] = React.useState(false);
+const BurgerConstructor = (props: { data: Array<TIngredientsItem> }) => {
+    const [isShowOrder, setIsShowOrder] = React.useState(false)
 
     const openOrderDetails = () => {
-        document.body.classList.add('overflow-hidden');
-        setIsShowOrder(true);
+        document.body.classList.add('overflow-hidden')
+        setIsShowOrder(true)
     }
 
     const closeOrderDetails = () => {
-        document.body.classList.remove('overflow-hidden');
-        setIsShowOrder(false);
+        document.body.classList.remove('overflow-hidden')
+        setIsShowOrder(false)
     }
 
-    const newBurger: ({
-        _id: string;
-        name: string;
-        type: string;
-        proteins: number;
-        fat: number;
-        carbohydrates: number;
-        calories: number;
-        price: number;
-        image: string;
-        image_mobile: string;
-        image_large: string;
-        __v: number;
-    })[] = []
+    const newBurger: Array<TIngredientsItem> = []
 
     /*ищем совпадения и кидаем их в список*/
     newBurgerArr.forEach(e => {
@@ -64,12 +52,14 @@ const BurgerConstructor = (props: { data: any }) => {
                     />
                     <ul className={styles.list}>
                         {newBurger.map((item, index) => {
-                            return <li key={index} className={styles.wrap}>
-                            <span className={styles.icon}>
-                                <DragIcon type="primary" />
-                            </span>
-                                <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} />
-                            </li>
+                            return (
+                                <li key={index} className={styles.wrap}>
+                                    <span className={styles.icon}>
+                                        <DragIcon type="primary" />
+                                    </span>
+                                    <ConstructorElement text={item.name} price={item.price} thumbnail={item.image} />
+                                </li>
+                            )
                         })}
                     </ul>
                     <ConstructorElement
@@ -106,4 +96,4 @@ const BurgerConstructor = (props: { data: any }) => {
     );
 }
 
-export default BurgerConstructor;
+export default BurgerConstructor
