@@ -6,6 +6,7 @@ const BurgerIngredientsContentItem = (props: {
     data: any
     type: string
     name: string
+    onClick: any
 }) => {
     const category = props.data.filter((el: any) => el.type === props.type)
 
@@ -19,7 +20,11 @@ const BurgerIngredientsContentItem = (props: {
                     price: number
                     _id: string
                 }) => (
-                    <li key={item._id} className={`${styles.item} mt-6`}>
+                    <li
+                        key={item._id}
+                        className={`${styles.item} mt-6`}
+                        onClick={() => { props.onClick(item)}}
+                    >
                         <img className='ml-4 mr-4' src={item.image} alt={item.name} />
                         <div className={`${styles.price} mt-1 mb-1`}>
                             <p className='text text_type_digits-default mr-2'>{item.price}</p>
