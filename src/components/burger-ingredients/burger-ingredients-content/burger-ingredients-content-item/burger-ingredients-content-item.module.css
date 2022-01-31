@@ -6,6 +6,7 @@
 .item {
     position: relative;
     width: 272px;
+    cursor: pointer;
 }
 
 .item:nth-child(odd) {
