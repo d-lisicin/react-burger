@@ -1,15 +1,16 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
-import BurgerConstructor from "../burger-constructor/burger-constructor"
+import BurgerConstructor from '../burger-constructor/burger-constructor'
+import { IngredientsContext } from '../../services/ingredientsContext'
 import styles from './app.module.css'
 
 function App() {
-    const [data, setData] = React.useState([])
+    const [ingredients, setIngredients] = useState([])
 
     const url = 'https://norma.nomoreparties.space/api/ingredients'
 
-    React.useEffect(() => {
+    useEffect(() => {
         const getData = async () => {
             await fetch(url)
                 .then(res => {
@@ -19,7 +20,7 @@ function App() {
                         throw new Error('Something went wrong')
                     }
                 })
-                .then(res => setData(res.data))
+                .then(res => setIngredients(res.data))
                 .catch(err => console.log(err))
         };
         getData()
@@ -28,14 +29,16 @@ function App() {
     return (
         <div className="App">
             <AppHeader />
-            {data.length &&
-                <main className={`${styles.main} mt-10`}>
-                    <BurgerIngredients data={data}/>
-                    <BurgerConstructor data={data}/>
-                </main>
+            {ingredients.length && setIngredients &&
+                <IngredientsContext.Provider value={{ ingredients }}>
+                    <main className={`${styles.main} mt-10`}>
+                        <BurgerIngredients />
+                        <BurgerConstructor />
+                    </main>
+                </IngredientsContext.Provider>
             }
         </div>
     );
 }
 
-export default App;
+export default App

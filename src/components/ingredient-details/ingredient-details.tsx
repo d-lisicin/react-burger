@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 import styles from './ingredient-details.module.css'
-import { TIngredientsItem } from "../../utils/types"
+import { TIngredientsItem } from '../../utils/types'
 
 const IngredientDetails = (props: {
     ingredient: TIngredientsItem}) => {

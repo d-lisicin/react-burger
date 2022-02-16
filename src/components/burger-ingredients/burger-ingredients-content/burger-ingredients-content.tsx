@@ -1,11 +1,9 @@
 import React from 'react'
-import BurgerIngredientsContentItem from "./burger-ingredients-content-item/burger-ingredients-content-item"
-import { TIngredientsItem } from '../../../utils/types'
+import BurgerIngredientsContentItem from './burger-ingredients-content-item/burger-ingredients-content-item'
 import styles from './burger-ingredients-content.module.css'
 
 const BurgerIngredientsContent = (
     props: {
-        data: TIngredientsItem[]
         setIngredient: React.Dispatch<React.SetStateAction<null>>
         onClick: () => void
     }) => {
@@ -32,7 +30,6 @@ const BurgerIngredientsContent = (
                         key={index}
                         type={item.type}
                         name={item.name}
-                        data={props.data}
                         onClick={elementClick}
                     />
                 )
