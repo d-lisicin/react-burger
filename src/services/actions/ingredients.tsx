@@ -1,5 +1,6 @@
 import Actions from './index'
 import { apiURL } from '../../utils/constants'
+import { checkResponse } from '../../helpers/api'
 import { IIngredientsItem } from '../../utils/types'
 
 export const getIngredients = () => (dispatch: (arg0: { type: string, value?: IIngredientsItem }) => void) => {
@@ -8,13 +9,7 @@ export const getIngredients = () => (dispatch: (arg0: { type: string, value?: II
     })
 
     fetch(`${apiURL}/api/ingredients`)
-        .then(res => {
-            if (res.ok) {
-                return res.json()
-            } else {
-                throw new Error('Something went wrong')
-            }
-        })
+        .then(checkResponse)
         .then((res) => {
             dispatch({
                 type: Actions.GET_INGREDIENTS_SUCCESS,

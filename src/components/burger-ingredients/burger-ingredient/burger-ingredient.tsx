@@ -1,10 +1,10 @@
 import React, { useRef , useEffect } from 'react'
-import BurgerIngredientsContentItem from './burger-ingredients-content-item/burger-ingredients-content-item'
-import styles from './burger-ingredients-content.module.css'
+import BurgerIngredientItem from './burger-ingredient-item/burger-ingredient-item'
+import styles from './burger-ingredient.module.css'
 import Actions from '../../../services/actions'
 import { useDispatch } from 'react-redux'
 
-const BurgerIngredientsContent = () => {
+const BurgerIngredient = () => {
     const dispatch = useDispatch()
     const scrollRef = useRef<HTMLDivElement>(null)
     const categories = [
@@ -45,7 +45,7 @@ const BurgerIngredientsContent = () => {
                 name: string
             }, index) => {
                 return (
-                    <BurgerIngredientsContentItem
+                    <BurgerIngredientItem
                         key={index}
                         type={item.type}
                         name={item.name}
@@ -56,4 +56,4 @@ const BurgerIngredientsContent = () => {
     );
 }
 
-export default BurgerIngredientsContent
+export default BurgerIngredient

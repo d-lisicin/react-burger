@@ -1,11 +1,11 @@
 import React, { useRef } from 'react'
-import styles from './burger-ingredients-content-item.module.css'
+import styles from './burger-ingredient-item.module.css'
 import { IIngredient, IIngredientsItem } from '../../../../utils/types'
 import { useDispatch, useSelector } from 'react-redux'
-import BurgerIngredientsContentItemDrag from './burger-ingredients-content-item-drag/burger-ingredients-content-item-drag'
+import BurgerIngredientItemDrag from './burger-ingredient-item-drag/burger-ingredient-item-drag'
 import Actions from '../../../../services/actions'
 
-const BurgerIngredientsContentItem = (props: {
+const BurgerIngredientItem = (props: {
     type: string,
     name: string
 }) => {
@@ -30,7 +30,7 @@ const BurgerIngredientsContentItem = (props: {
                         className={`${styles.item} mt-6`}
                         onClick={() => { openIngredientDetails(item) }}
                     >
-                        <BurgerIngredientsContentItemDrag ingredient={ item } />
+                        <BurgerIngredientItemDrag ingredient={ item } />
                     </li>
                 ))}
             </ul>
@@ -38,5 +38,5 @@ const BurgerIngredientsContentItem = (props: {
     )
 }
 
-export default BurgerIngredientsContentItem
+export default BurgerIngredientItem
 

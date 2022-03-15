@@ -67,8 +67,15 @@ const BurgerConstructor = () => {
     })
 
     const sendOrder = async () => {
-        dispatch(postOrder(orderId))
-        document.body.classList.add('overflow-hidden')
+        if (activeBun) {
+            dispatch(postOrder(orderId))
+            document.body.classList.add('overflow-hidden')
+        }
+    }
+
+    const closeOrderDetails = () => {
+        document.body.classList.remove('overflow-hidden')
+        dispatch({ type: Actions.DELETE_ORDER_NUMBER })
     }
 
     return (
@@ -122,17 +129,22 @@ const BurgerConstructor = () => {
                         </span>
                         <span className={styles.iconPrice}><CurrencyIcon type="primary" /></span>
                     </div>
-                    <Button
-                        type="primary"
-                        size="large"
-                        onClick={sendOrder}
-                    >
-                        Оформить заказ
-                    </Button>
+                    <div className={ activeBun ? styles.buttonWrap : styles.buttonWrapBlock}>
+                        <Button
+                            type="primary"
+                            size="large"
+                            onClick={sendOrder}
+                        >
+                            Оформить заказ
+                        </Button>
+                    </div>
                 </div>
             </section>
             {orderValue &&
-                <Modal title=''>
+                <Modal
+                    title=''
+                    onClick={closeOrderDetails}
+                >
                     <OrderDetails />
                 </Modal>
             }
