@@ -1,18 +1,13 @@
 import React from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import Actions from '../../../services/actions'
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 import { ITab } from '../../../utils/types'
 
 const BurgerIngredientsTab = () => {
-    const dispatch = useDispatch()
     const current = useSelector((state: ITab) => state.activeTab)
 
-    const tabClick = (e: string) => {
-        dispatch({
-            type: Actions.ACTIVE_TAB,
-            value: e
-        });
+    const tabClick = () => {
+        return
     }
 
     return (
@@ -20,21 +15,21 @@ const BurgerIngredientsTab = () => {
             <Tab
                 value="bun"
                 active={ current === 'bun' }
-                onClick={ (e) => tabClick(e) }
+                onClick={tabClick}
             >
                 Булки
             </Tab>
             <Tab
                 value="sauce"
                 active={ current === 'sauce' }
-                onClick={ (e) => tabClick(e) }
+                onClick={tabClick}
             >
                 Соусы
             </Tab>
             <Tab
                 value="main"
                 active={ current === 'main' }
-                onClick={ (e) => tabClick(e) }
+                onClick={tabClick}
             >
                 Начинки
             </Tab>
