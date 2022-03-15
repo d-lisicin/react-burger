@@ -1,44 +1,35 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
-import { IngredientsContext } from '../../services/ingredientsContext'
+import { getIngredients } from '../../services/actions/ingredients'
 import styles from './app.module.css'
+import { IIngredient } from '../../utils/types'
 
 function App() {
-    const [ingredients, setIngredients] = useState([])
-
-    const url = 'https://norma.nomoreparties.space/api/ingredients'
+    const dispatch = useDispatch()
+    const ingredients = useSelector((state: IIngredient) => state.ingredients)
 
     useEffect(() => {
-        const getData = async () => {
-            await fetch(url)
-                .then(res => {
-                    if (res.ok) {
-                        return res.json()
-                    } else {
-                        throw new Error('Something went wrong')
-                    }
-                })
-                .then(res => setIngredients(res.data))
-                .catch(err => console.log(err))
-        };
-        getData()
-    }, [])
+        dispatch(getIngredients())
+    }, [dispatch])
 
     return (
         <div className="App">
             <AppHeader />
-            {ingredients.length && setIngredients &&
-                <IngredientsContext.Provider value={{ ingredients }}>
+            {ingredients.length &&
+                <DndProvider backend={HTML5Backend}>
                     <main className={`${styles.main} mt-10`}>
                         <BurgerIngredients />
                         <BurgerConstructor />
                     </main>
-                </IngredientsContext.Provider>
+                </DndProvider>
             }
         </div>
-    );
+    )
 }
 
 export default App

@@ -1,42 +1,42 @@
-import React, {useContext} from 'react'
-import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import React, { useRef } from 'react'
 import styles from './burger-ingredients-content-item.module.css'
-import { TIngredientsItem } from '../../../../utils/types'
-import { IngredientsContext } from '../../../../services/ingredientsContext'
+import { IIngredient, IIngredientsItem } from '../../../../utils/types'
+import { useDispatch, useSelector } from 'react-redux'
+import BurgerIngredientsContentItemDrag from './burger-ingredients-content-item-drag/burger-ingredients-content-item-drag'
+import Actions from '../../../../services/actions'
 
 const BurgerIngredientsContentItem = (props: {
-    type: string;
-    name: string;
-    onClick: Function
+    type: string,
+    name: string
 }) => {
 
-    const { ingredients } = useContext(IngredientsContext)
+    const dispatch = useDispatch()
+    const ingredientsItem = useSelector((state: IIngredient) => state.ingredients)
+    const categoryRef = useRef<null | HTMLDivElement>(null)
+    const category = ingredientsItem.filter((el: { type: string }) => el.type === props.type)
 
-    const category = ingredients.filter((el: { type: string; }) => el.type === props.type)
+    const openIngredientDetails = (ingredientDetails: IIngredientsItem) => {
+        document.body.classList.add('overflow-hidden')
+        dispatch({ type: Actions.SET_INGREDIENT_VIEW, payload: ingredientDetails })
+    }
 
     return (
-        <>
+        <div id={props.type} ref={ categoryRef }>
             <h3 className='text text_type_main-medium'>{props.name}</h3>
             <ul className={`${styles.list} mb-10 ml-4 mr-2`}>
-                {category.map((item: TIngredientsItem) => (
+                {category.map((item: IIngredientsItem) => (
                     <li
                         key={item._id}
                         className={`${styles.item} mt-6`}
-                        onClick={() => { props.onClick(item) }}
+                        onClick={() => { openIngredientDetails(item) }}
                     >
-                        <img className='ml-4 mr-4' src={item.image} alt={item.name} />
-                        <div className={`${styles.price} mt-1 mb-1`}>
-                            <p className='text text_type_digits-default mr-2'>{item.price}</p>
-                            <CurrencyIcon type="primary"/>
-                        </div>
-                        <p className={`${styles.name} text text_type_main-default`}>{item.name}</p>
-                        <Counter count={1} size="default" />
+                        <BurgerIngredientsContentItemDrag ingredient={ item } />
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     )
 }
 
-export default BurgerIngredientsContentItem;
+export default BurgerIngredientsContentItem
 
