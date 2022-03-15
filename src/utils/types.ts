@@ -12,3 +12,7 @@ export type TIngredientsItem = {
     type: string;
     __v: number;
 }
+
+export interface TIngredient {
+    ingredients: TIngredientsItem[]
+}

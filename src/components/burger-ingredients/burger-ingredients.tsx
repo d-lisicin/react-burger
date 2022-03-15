@@ -1,14 +1,13 @@
-import React from 'react'
+import { useState } from 'react'
 import BurgerIngredientsTab from './burger-ingredients-tab/burger-ingredients-tab'
 import BurgerIngredientsContent from './burger-ingredients-content/burger-ingredients-content'
-import Modal from "../modal/modal"
-import IngredientDetails from "../ingredient-details/ingredient-details"
-import { TIngredientsItem } from '../../utils/types'
+import Modal from '../modal/modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
 import styles from './burger-ingredients.module.css'
 
-const BurgerIngredients = (props: { data: Array<TIngredientsItem> }) => {
-    const [isShowDetails, setIsShowDetails] = React.useState(false)
-    const [ingredientDetails, setIngredientDetails] = React.useState(null)
+const BurgerIngredients = () => {
+    const [isShowDetails, setIsShowDetails] = useState(false)
+    const [ingredientDetails, setIngredientDetails] = useState(null)
 
     const openIngredientDetails = () => {
         document.body.classList.add('overflow-hidden')
@@ -27,7 +26,6 @@ const BurgerIngredients = (props: { data: Array<TIngredientsItem> }) => {
                 <h2 className='text text_type_main-large mb-5'>Соберите бургер</h2>
                 <BurgerIngredientsTab />
                 <BurgerIngredientsContent
-                    data={props.data}
                     setIngredient={setIngredientDetails}
                     onClick={openIngredientDetails}
                 />

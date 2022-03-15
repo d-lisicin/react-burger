@@ -1,21 +1,24 @@
-import React from 'react'
-import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components"
+import React, {useContext} from 'react'
+import {Counter, CurrencyIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredients-content-item.module.css'
-import { TIngredientsItem } from "../../../../utils/types"
+import { TIngredientsItem } from '../../../../utils/types'
+import { IngredientsContext } from '../../../../services/ingredientsContext'
 
 const BurgerIngredientsContentItem = (props: {
-    data: TIngredientsItem[];
     type: string;
     name: string;
     onClick: Function
 }) => {
-    const category = props.data.filter((el) => el.type === props.type)
+
+    const { ingredients } = useContext(IngredientsContext)
+
+    const category = ingredients.filter((el: { type: string; }) => el.type === props.type)
 
     return (
         <>
             <h3 className='text text_type_main-medium'>{props.name}</h3>
             <ul className={`${styles.list} mb-10 ml-4 mr-2`}>
-                {category.map((item) => (
+                {category.map((item: TIngredientsItem) => (
                     <li
                         key={item._id}
                         className={`${styles.item} mt-6`}
