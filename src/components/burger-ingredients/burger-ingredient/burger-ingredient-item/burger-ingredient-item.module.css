@@ -12,13 +12,3 @@
 .item:nth-child(odd) {
     margin-right: 24px;
 }
-
-.price {
-    display: flex;
-    justify-content: center;
-}
-
-.name {
-    min-height: 48px;
-    text-align: center;
-}

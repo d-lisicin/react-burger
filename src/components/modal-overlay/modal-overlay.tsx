@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './modal-overlay.module.css';
+import React from 'react'
+import styles from './modal-overlay.module.css'
 
 const ModalOverlay = (props: { onClick: () => void } ) => {
     return (
@@ -8,4 +8,4 @@ const ModalOverlay = (props: { onClick: () => void } ) => {
 }
 
 
-export default ModalOverlay;
+export default ModalOverlay
