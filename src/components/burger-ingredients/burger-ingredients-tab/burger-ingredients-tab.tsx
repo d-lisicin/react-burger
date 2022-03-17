@@ -1,17 +1,36 @@
 import React from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useSelector } from 'react-redux'
+import { ITab } from '../../../utils/types'
 
 const BurgerIngredientsTab = () => {
-    const [current, setCurrent] = React.useState('one')
+    const current = useSelector((state: ITab) => state.activeTab)
+
+    const tabClick = () => {
+        return
+    }
+
     return (
         <div style={{ display: 'flex' }}>
-            <Tab value="one" active={current === 'one'} onClick={setCurrent}>
+            <Tab
+                value="bun"
+                active={ current === 'bun' }
+                onClick={tabClick}
+            >
                 Булки
             </Tab>
-            <Tab value="two" active={current === 'two'} onClick={setCurrent}>
+            <Tab
+                value="sauce"
+                active={ current === 'sauce' }
+                onClick={tabClick}
+            >
                 Соусы
             </Tab>
-            <Tab value="three" active={current === 'three'} onClick={setCurrent}>
+            <Tab
+                value="main"
+                active={ current === 'main' }
+                onClick={tabClick}
+            >
                 Начинки
             </Tab>
         </div>

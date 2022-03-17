@@ -1,9 +1,9 @@
 import React from 'react'
 
 function AppHeaderLink(props: {
-    link: string;
-    className: string ;
-    icon: React.ReactFragment;
+    link: string,
+    className: string,
+    icon: React.ReactFragment,
     text: string
 }) {
     return (
@@ -11,7 +11,7 @@ function AppHeaderLink(props: {
             {props.icon}
             <span className="pl-2">{props.text}</span>
         </a>
-    );
+    )
 }
 
-export default AppHeaderLink;
+export default AppHeaderLink

@@ -1,24 +1,19 @@
-import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import BurgerIngredientsTab from './burger-ingredients-tab/burger-ingredients-tab'
-import BurgerIngredientsContent from './burger-ingredients-content/burger-ingredients-content'
-import Modal from "../modal/modal"
-import IngredientDetails from "../ingredient-details/ingredient-details"
-import { TIngredientsItem } from '../../utils/types'
+import BurgerIngredient from './burger-ingredient/burger-ingredient'
+import Modal from '../modal/modal'
+import IngredientDetails from '../ingredient-details/ingredient-details'
+import Actions from '../../services/actions'
 import styles from './burger-ingredients.module.css'
+import { IIngredientView } from '../../utils/types'
 
-const BurgerIngredients = (props: { data: Array<TIngredientsItem> }) => {
-    const [isShowDetails, setIsShowDetails] = React.useState(false)
-    const [ingredientDetails, setIngredientDetails] = React.useState(null)
-
-    const openIngredientDetails = () => {
-        document.body.classList.add('overflow-hidden')
-        setIsShowDetails(true)
-    }
+const BurgerIngredients = () => {
+    const dispatch = useDispatch()
+    const ingredientDetails = useSelector((state: IIngredientView) => state.ingredientView.ingredientView)
 
     const closeIngredientDetails = () => {
         document.body.classList.remove('overflow-hidden')
-        setIsShowDetails(false)
-        setIngredientDetails(null)
+        dispatch({ type: Actions.DELETE_INGREDIENT_VIEW })
     }
 
     return (
@@ -26,22 +21,18 @@ const BurgerIngredients = (props: { data: Array<TIngredientsItem> }) => {
             <section className={`${styles.section} mb-10 mr-10`}>
                 <h2 className='text text_type_main-large mb-5'>Соберите бургер</h2>
                 <BurgerIngredientsTab />
-                <BurgerIngredientsContent
-                    data={props.data}
-                    setIngredient={setIngredientDetails}
-                    onClick={openIngredientDetails}
-                />
+                <BurgerIngredient />
             </section>
-            {isShowDetails && ingredientDetails &&
+            {ingredientDetails &&
                 <Modal
                     title='Детали ингредиента'
                     onClick={closeIngredientDetails}
                 >
-                    <IngredientDetails ingredient={ingredientDetails} />
+                    <IngredientDetails />
                 </Modal >
             }
         </>
-    );
+    )
 }
 
-export default BurgerIngredients;
+export default BurgerIngredients

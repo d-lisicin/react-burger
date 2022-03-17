@@ -1,0 +1,9 @@
+.price {
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    min-height: 48px;
+    text-align: center;
+}

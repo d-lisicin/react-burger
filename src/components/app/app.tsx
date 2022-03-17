@@ -1,41 +1,35 @@
-import React from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import AppHeader from '../app-header/app-header'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
-import BurgerConstructor from "../burger-constructor/burger-constructor"
+import BurgerConstructor from '../burger-constructor/burger-constructor'
+import { getIngredients } from '../../services/actions/ingredients'
 import styles from './app.module.css'
+import { IIngredient } from '../../utils/types'
 
 function App() {
-    const [data, setData] = React.useState([])
+    const dispatch = useDispatch()
+    const ingredients = useSelector((state: IIngredient) => state.ingredients)
 
-    const url = 'https://norma.nomoreparties.space/api/ingredients'
-
-    React.useEffect(() => {
-        const getData = async () => {
-            await fetch(url)
-                .then(res => {
-                    if (res.ok) {
-                        return res.json()
-                    } else {
-                        throw new Error('Something went wrong')
-                    }
-                })
-                .then(res => setData(res.data))
-                .catch(err => console.log(err))
-        };
-        getData()
-    }, [])
+    useEffect(() => {
+        dispatch(getIngredients())
+    }, [dispatch])
 
     return (
         <div className="App">
             <AppHeader />
-            {data.length &&
-                <main className={`${styles.main} mt-10`}>
-                    <BurgerIngredients data={data}/>
-                    <BurgerConstructor data={data}/>
-                </main>
+            {ingredients.length &&
+                <DndProvider backend={HTML5Backend}>
+                    <main className={`${styles.main} mt-10`}>
+                        <BurgerIngredients />
+                        <BurgerConstructor />
+                    </main>
+                </DndProvider>
             }
         </div>
-    );
+    )
 }
 
-export default App;
+export default App

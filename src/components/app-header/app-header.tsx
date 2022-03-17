@@ -1,7 +1,7 @@
 import React from 'react'
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import AppHeaderLink from './app-header-link/app-header-link'
-import styles from './app-header.module.css';
+import styles from './app-header.module.css'
 
 function AppHeader() {
     return (
@@ -32,7 +32,7 @@ function AppHeader() {
                 />
             </nav>
         </header>
-    );
+    )
 }
 
-export default AppHeader;
+export default AppHeader

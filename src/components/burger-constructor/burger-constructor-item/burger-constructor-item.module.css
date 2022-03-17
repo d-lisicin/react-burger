@@ -1,0 +1,23 @@
+.icon {
+    position: absolute;
+    left: -5px;
+    top: 50%;
+    transform: translate3d(-100%, -50%, 0);
+    cursor: grabbing;
+}
+
+.wrap {
+    display: flex;
+    position: relative;
+    margin-bottom: 16px;
+    transition: 0.2s;
+}
+
+.wrap:last-child {
+    margin-bottom: 0;
+}
+
+.isDragging {
+    opacity: 0;
+    transition: 0.3s;
+}
