@@ -26,6 +26,10 @@ export const ForgotPasswordPage = () => {
         }
     }
 
+    if (profile.isForgotSend) {
+        return <Redirect to={ location.state?.from || '/reset-password' } />
+    }
+
     if (!!profile.user) {
         return <Redirect to={ location.state?.from || '/' } />
     }
@@ -36,7 +40,10 @@ export const ForgotPasswordPage = () => {
 
     return (
         <div className={styles.formWrap}>
-            <form className={styles.form}>
+            <form
+                className={styles.form}
+                onSubmit={ postForgotPassword }
+            >
                 <div className={`${styles.title} text text_type_main-medium mb-6`}>Восстановление пароля</div>
                 <div className={`${styles.inputWrap} mb-6`}>
                     <Input
@@ -49,13 +56,12 @@ export const ForgotPasswordPage = () => {
                 <Button
                     type='primary'
                     size='medium'
-                    onClick={postForgotPassword}
                 >
                     Восстановить
                 </Button>
 
                 <div className='text text_type_main-default text_color_inactive mt-5'>
-                    { profile.forgotMessage ? profile.forgotMessage : notValidMessage }
+                    { profile.isForgotSend ? 'Запрос на восстановление пароля отправлен' : notValidMessage }
                 </div>
 
                 <div className={'text text_type_main-default text_color_inactive mt-20'}>

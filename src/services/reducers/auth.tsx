@@ -5,7 +5,7 @@ const initialState = {
     user: null,
     error: null,
     profileUpdate: false,
-    forgotMessage: '',
+    isForgotSend: false,
     ressetMessage: ''
 }
 
@@ -101,13 +101,13 @@ export const authReducer = (state = initialState, action: { type: string, payloa
             return {
                 ...state,
                 loading: false,
-                forgotMessage: action.payload
+                isForgotSend: action.payload
             }
         case Actions.FORGOT_ERROR:
             return {
                 ...state,
                 loading: false,
-                forgotMessage: action.payload
+                isForgotSend: action.payload
             }
         case Actions.RESET_PASSWORD_REQUEST:
             return {

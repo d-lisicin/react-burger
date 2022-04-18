@@ -97,7 +97,7 @@ export interface IProfileUser {
 export interface IProfile {
     profile: {
         error: string,
-        forgotMessage: string,
+        isForgotSend: boolean,
         ressetMessage: string,
         loading: boolean,
         profileUpdate: boolean,

@@ -20,6 +20,10 @@ export const ResetPasswordPage = () => {
         dispatch(resetPassword({ password, mailCode }))
     }
 
+    if (!profile.isForgotSend) {
+        return <Redirect to={ location.state?.from || '/forgot-password' } />
+    }
+
     if (!!profile.user) {
         return <Redirect to={ location.state?.from || '/' } />
     }
@@ -30,7 +34,10 @@ export const ResetPasswordPage = () => {
 
     return (
         <div className={styles.formWrap}>
-            <form className={styles.form}>
+            <form
+                className={styles.form}
+                onSubmit={ postResetPassword }
+            >
                 <div className={`${styles.title} text text_type_main-medium mb-6`}>Восстановление пароля</div>
                 <div className={`${styles.inputWrap} mb-6`}>
                     <Input
@@ -53,7 +60,6 @@ export const ResetPasswordPage = () => {
                 <Button
                     type='primary'
                     size='medium'
-                    onClick={postResetPassword}
                 >
                     Сохранить
                 </Button>

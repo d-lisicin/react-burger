@@ -171,7 +171,7 @@ export const editProfile = ({ name, email, password }: IFormData) => (dispatch: 
         })
 }
 
-export const forgotPassword = ({ email }: { email: string }) => (dispatch: (arg0: { type: string, payload?: string }) => void) => {
+export const forgotPassword = ({ email }: { email: string }) => (dispatch: (arg0: { type: string, payload?: boolean }) => void) => {
     dispatch({ type: Actions.FORGOT_REQUEST })
 
     fetch(`${apiURL}/api/password-reset`,{
@@ -184,7 +184,7 @@ export const forgotPassword = ({ email }: { email: string }) => (dispatch: (arg0
             if (res.success) {
                 dispatch({
                     type: Actions.FORGOT_SUCCESS,
-                    payload: res.message
+                    payload: res.success,
                 })
             } else {
                 throw new Error('Something went wrong')

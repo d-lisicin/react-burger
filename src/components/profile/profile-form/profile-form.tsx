@@ -67,7 +67,10 @@ export const ProfileForm = () => {
     }, [disabled])
 
     return (
-        <form  className={styles.wrap}>
+        <form
+            className={styles.wrap}
+            onSubmit={ saveProfile }
+        >
             <div className={'mb-6'}>
                 <Input
                     ref={nameRef}
@@ -118,7 +121,6 @@ export const ProfileForm = () => {
                     <Button
                         type="primary"
                         size="medium"
-                        onClick={ saveProfile }
                     >
                         Сохранить
                     </Button>

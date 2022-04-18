@@ -36,7 +36,10 @@ export const LoginPage = () => {
 
     return (
         <div className={styles.formWrap}>
-            <form className={styles.form}>
+            <form
+                className={styles.form}
+                onSubmit={ postLogin }
+            >
                 <div className={`${styles.title} text text_type_main-medium mb-6`}>Вход</div>
                 <div className={`${styles.inputWrap} mb-6`}>
                     <Input
@@ -56,7 +59,6 @@ export const LoginPage = () => {
                 <Button
                     type='primary'
                     size='medium'
-                    onClick={ postLogin }
                 >
                     Войти
                 </Button>

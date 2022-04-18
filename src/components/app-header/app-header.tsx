@@ -34,9 +34,12 @@ function AppHeader() {
                         <span className="pl-2">Лента заказов</span>
                     </NavLink>
                 </div>
-                <span className={styles.logo}>
+                <NavLink
+                    to='/'
+                    className={styles.logo}
+                >
                     <Logo />
-                </span>
+                </NavLink>
                 <NavLink
                     to='/profile'
                     className={`${styles.link} ${styles.rightColumn} text text_type_main-default mr-5`}

@@ -31,7 +31,10 @@ export const RegisterPage = () => {
 
     return (
         <div className={styles.formWrap}>
-            <form className={styles.form}>
+            <form
+                className={styles.form}
+                onSubmit={ postReg }
+            >
                 <div className={`${styles.title} text text_type_main-medium mb-6`}>Регистрация</div>
                 <div className={`${styles.inputWrap} mb-6`}>
                     <Input
@@ -59,7 +62,6 @@ export const RegisterPage = () => {
                 <Button
                     type='primary'
                     size='medium'
-                    onClick={postReg}
                 >
                     Зарегистрироваться
                 </Button>
