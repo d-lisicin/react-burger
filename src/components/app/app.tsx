@@ -1,33 +1,37 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 import AppHeader from '../app-header/app-header'
-import BurgerIngredients from '../burger-ingredients/burger-ingredients'
-import BurgerConstructor from '../burger-constructor/burger-constructor'
+import { Router } from '../../router'
+import { useEffect } from 'react'
 import { getIngredients } from '../../services/actions/ingredients'
-import styles from './app.module.css'
+import { useDispatch, useSelector } from 'react-redux'
+import Preloader from '../preloader/preloader'
+import { checkUser } from '../../services/actions/auth'
 import { IIngredient } from '../../utils/types'
+import { getTokens } from '../../helpers/auth'
 
 function App() {
     const dispatch = useDispatch()
-    const ingredients = useSelector((state: IIngredient) => state.ingredients)
+    const ingredients = !!useSelector((state: IIngredient) => state.ingredients.items)
+    const isIngredientsLoad = useSelector((state: { ingredients: { loading: boolean } }) => state.ingredients.loading)
+    const { accessToken, refreshToken } = getTokens()
 
     useEffect(() => {
-        dispatch(getIngredients())
-    }, [dispatch])
+        if (ingredients) {
+            dispatch(getIngredients())
+        }
+    }, [dispatch, ingredients])
+
+    useEffect(() => {
+        dispatch(checkUser())
+    }, [dispatch, accessToken, refreshToken])
+
+    if (!isIngredientsLoad) {
+        return <Preloader />
+    }
 
     return (
         <div className="App">
             <AppHeader />
-            {ingredients.length &&
-                <DndProvider backend={HTML5Backend}>
-                    <main className={`${styles.main} mt-10`}>
-                        <BurgerIngredients />
-                        <BurgerConstructor />
-                    </main>
-                </DndProvider>
-            }
+            <Router />
         </div>
     )
 }

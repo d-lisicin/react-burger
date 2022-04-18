@@ -1,3 +1,5 @@
+import React from 'react'
+
 export interface IIngredientsItem {
     _id: string,
     calories: number,
@@ -11,11 +13,13 @@ export interface IIngredientsItem {
     proteins: number,
     type: string,
     __v: number,
-    _idNew: string,
+    _idNew: string
 }
 
 export interface IIngredient {
-    ingredients: IIngredientsItem[]
+    ingredients: {
+        items: IIngredientsItem[]
+    }
 }
 
 export interface IIngredientArr {
@@ -25,12 +29,6 @@ export interface IIngredientArr {
 export interface IHoverIngredient {
     index: number,
     ingredient: IIngredientsItem
-}
-
-export interface IIngredientView {
-    ingredientView: {
-        ingredientView: IIngredientsItem
-    }
 }
 
 export interface IOrder {
@@ -68,4 +66,63 @@ export interface IIngredientConstructor {
 
 export interface ITab {
     activeTab: string
+}
+
+export interface ILocationState {
+    hash: string
+    pathname: string
+    search: string
+    state: ILocationState
+}
+
+export interface ILocation {
+    from: {
+        pathname: string
+    }
+    ingredientId: ILocationState
+}
+
+export interface IProfileUser {
+    profile: {
+        user: {
+            success: boolean,
+            user: {
+                email: string,
+                name: string
+            }
+        }
+    }
+}
+
+export interface IProfile {
+    profile: {
+        error: string,
+        forgotMessage: string,
+        ressetMessage: string,
+        loading: boolean,
+        profileUpdate: boolean,
+        user: {
+            success: boolean,
+            user: {
+                email: string,
+                name: string
+            }
+        }
+    }
+}
+
+export interface IChildrenRoute {
+    children: React.ReactNode,
+    exact: boolean,
+    path: string
+}
+
+export interface IFormData {
+    name: string,
+    email: string,
+    password: string
+}
+
+export interface IParamTypes {
+    id: string
 }

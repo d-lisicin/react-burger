@@ -2,8 +2,7 @@ import Actions from './index'
 import { apiURL } from '../../utils/constants'
 import { checkResponse } from '../../helpers/api'
 
-
-export const postOrder = (ingredients: string[]) => (dispatch: (arg0: { type: string; payload?: number }) => void) => {
+export const postOrder = (ingredients: string[]) => (dispatch: (arg0: { type: string, payload?: number }) => void) => {
     dispatch({
         type: Actions.POST_ORDER_REQUEST
     })
@@ -17,8 +16,7 @@ export const postOrder = (ingredients: string[]) => (dispatch: (arg0: { type: st
         .then((res) => {
             if (res.success) {
                 dispatch({
-                    type: Actions.POST_ORDER_SUCCESS,
-                    payload: res.order.number
+                    type: Actions.CLEAR_INGREDIENT_POSITION,
                 })
                 dispatch({
                     type: Actions.POST_ORDER_SUCCESS,

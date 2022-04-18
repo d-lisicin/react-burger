@@ -18,4 +18,4 @@ export const ingredientViewReducer = (state = initialState, action: { type: stri
         default:
             return state
     }
-};
+}

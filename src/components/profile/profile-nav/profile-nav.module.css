@@ -1,0 +1,18 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+}
+
+.link {
+    text-decoration: none;
+    line-height: 64px;
+}
+
+.linkActive {
+    color: #fff;
+}
+
+.textInfo {
+    opacity: 0.4;
+}

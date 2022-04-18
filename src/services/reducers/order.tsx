@@ -37,5 +37,5 @@ export const orderReducer = (state = initialState, action: { type: string, paylo
         default:
             return state
     }
-};
+}
 
