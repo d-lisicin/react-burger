@@ -20,7 +20,9 @@ export const authReducer = (state = initialState, action: { type: string, payloa
             return {
                 ...state,
                 loading: false,
-                user: action.payload
+                user: {
+                    user: action.payload
+                }
             }
         case Actions.REGISTER_ERROR:
             return {
