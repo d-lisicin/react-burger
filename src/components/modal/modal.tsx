@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import ModalOverlay from '../modal-overlay/modal-overlay'
@@ -11,7 +11,6 @@ const Modal = (
         children: React.ReactChild | React.ReactFragment | React.ReactPortal
     } ) => {
 
-
     const modalRoot = document.getElementById('modal') as HTMLElement
 
     const keyPress = (e: { key: string }) => {
@@ -20,7 +19,7 @@ const Modal = (
         }
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         document.addEventListener('keydown', keyPress)
         return () => document.removeEventListener('keydown', keyPress)
     })
@@ -37,7 +36,7 @@ const Modal = (
                 >
                     <CloseIcon type="primary" />
                 </button>
-                {props.children}
+                { props.children }
             </div>
             <ModalOverlay onClick={props.onClick} />
         </>,

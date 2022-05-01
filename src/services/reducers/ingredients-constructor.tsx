@@ -1,5 +1,5 @@
 import Actions from '../actions'
-import {IDragHoverIndex, IIngredientsItem, TActionConstructor} from '../../utils/types'
+import { IDragHoverIndex, IIngredientsItem, TActionConstructor } from '../../utils/types'
 
 const initialState = {
     newBurger: []
@@ -15,6 +15,7 @@ export const ingredientsConstructorReducer = (state: { newBurger: IIngredientsIt
                     action.payload
                 ]
             }
+
         case Actions.ADD_BUN: {
             const payloadData = action.payload as IIngredientsItem
             const replaceNewBurger = [...state.newBurger]
@@ -31,6 +32,7 @@ export const ingredientsConstructorReducer = (state: { newBurger: IIngredientsIt
                 newBurger: replaceNewBurger
             }
         }
+
         case Actions.REMOVE_INGREDIENT: {
             const payloadData = action.payload as IIngredientsItem
             const replaceNewBurger = [...state.newBurger]
@@ -44,6 +46,7 @@ export const ingredientsConstructorReducer = (state: { newBurger: IIngredientsIt
                 newBurger: replaceNewBurger
             }
         }
+
         case Actions.CHANGE_INGREDIENT_POSITION: {
             const payloadData = action.payload as IDragHoverIndex
             const replaceNewBurger = [...state.newBurger]
@@ -61,7 +64,14 @@ export const ingredientsConstructorReducer = (state: { newBurger: IIngredientsIt
                 newBurger: replaceNewBurger
             }
         }
+
+        case Actions.CLEAR_INGREDIENT_POSITION: {
+            return {
+                ...state,
+                newBurger: []
+            }
+        }
         default:
             return state
     }
-};
+}
