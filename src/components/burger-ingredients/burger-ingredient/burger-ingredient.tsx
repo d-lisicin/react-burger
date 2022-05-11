@@ -30,8 +30,6 @@ const BurgerIngredient = () => {
                     dispatch({ type: Actions.ACTIVE_TAB, payload: 'main' })
                 }
             }
-
-            return
         })
     }, [dispatch])
 
