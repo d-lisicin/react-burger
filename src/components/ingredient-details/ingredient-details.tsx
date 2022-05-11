@@ -1,31 +1,35 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 import styles from './ingredient-details.module.css'
-import { IIngredientView } from '../../utils/types'
 import { useSelector } from 'react-redux'
+import { IIngredient, IParamTypes } from '../../utils/types'
 
 const IngredientDetails = () => {
-    const ingredientDetails = useSelector((state: IIngredientView) => state.ingredientView.ingredientView)
+    const { id } = useParams<IParamTypes>()
+
+    const ingredient = useSelector((state: IIngredient) => state.ingredients.items)
+    const ingredientInfo = ingredient.find((e: { _id: string }) => e._id === id)
 
     return (
         <div className={styles.wrap}>
-            <img className='text text_type_main-medium mb-4' src={ingredientDetails.image_large} alt={ingredientDetails.name} />
-            <p className='text text_type_main-medium mb-8'>{ingredientDetails.name}</p>
+            <img className='text text_type_main-medium mb-4' src={ingredientInfo?.image_large} alt={ingredientInfo?.name} />
+            <p className='text text_type_main-medium mb-8'>{ingredientInfo?.name}</p>
             <div className={`${styles.textWrap} mb-15`}>
                 <div className={`${styles.textItem} text_color_inactive mr-5`}>
                     <span className={`${styles.title} text text_type_main-default`}>Калории,ккал</span>
-                    <span className='text text_type_digits-default'>{ingredientDetails.calories}</span>
+                    <span className='text text_type_digits-default'>{ingredientInfo?.calories}</span>
                 </div>
                 <div className={`${styles.textItem} text_color_inactive mr-5`}>
                     <span className={`${styles.title} text text_type_main-default`}>Белки, г</span>
-                    <span className='text text_type_digits-default'>{ingredientDetails.proteins}</span>
+                    <span className='text text_type_digits-default'>{ingredientInfo?.proteins}</span>
                 </div>
                 <div className={`${styles.textItem} text_color_inactive mr-5`}>
                     <span className={`${styles.title} text text_type_main-default`}>Жиры, г</span>
-                    <span className='text text_type_digits-default'>{ingredientDetails.fat}</span>
+                    <span className='text text_type_digits-default'>{ingredientInfo?.fat}</span>
                 </div>
                 <div className={`${styles.textItem} text_color_inactive`}>
                     <span className={`${styles.title} text text_type_main-default`}>Углеводы, г</span>
-                    <span className='text text_type_digits-default'>{ingredientDetails.carbohydrates}</span>
+                    <span className='text text_type_digits-default'>{ingredientInfo?.carbohydrates}</span>
                 </div>
             </div>
         </div>

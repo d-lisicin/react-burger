@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 import styles from './burger-ingredient-item.module.css'
 import { IIngredient, IIngredientsItem } from '../../../../utils/types'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,13 +12,22 @@ const BurgerIngredientItem = (props: {
 }) => {
 
     const dispatch = useDispatch()
-    const ingredientsItem = useSelector((state: IIngredient) => state.ingredients)
+    const history = useHistory()
+    const location = useLocation()
+    const ingredientsItem = useSelector((state: IIngredient) => state.ingredients.items)
     const categoryRef = useRef<null | HTMLDivElement>(null)
     const category = ingredientsItem.filter((el: { type: string }) => el.type === props.type)
 
-    const openIngredientDetails = (ingredientDetails: IIngredientsItem) => {
+    const openIngredientDetails = (item: IIngredientsItem) => {
         document.body.classList.add('overflow-hidden')
-        dispatch({ type: Actions.SET_INGREDIENT_VIEW, payload: ingredientDetails })
+        history.push({
+            pathname: `/ingredients/${item._id}`,
+            state: {
+                ingredientId: location
+            }
+        })
+
+        dispatch({ type: Actions.SET_INGREDIENT_VIEW, payload: item })
     }
 
     return (
