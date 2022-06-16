@@ -1,6 +1,8 @@
-import Actions from '../actions'
+import * as Actions from '../actions'
+import { TAuthReducerState } from '../../utils/type'
+import { TAuthActionTypes } from '../actions/auth'
 
-const initialState = {
+const initialState: TAuthReducerState = {
     loading: false,
     user: null,
     error: null,
@@ -9,7 +11,10 @@ const initialState = {
     ressetMessage: ''
 }
 
-export const authReducer = (state = initialState, action: { type: string, payload: null }) => {
+export const authReducer = (
+    state = initialState,
+    action: TAuthActionTypes
+): TAuthReducerState => {
     switch (action.type) {
         case Actions.REGISTER_REQUEST:
             return {
@@ -20,9 +25,7 @@ export const authReducer = (state = initialState, action: { type: string, payloa
             return {
                 ...state,
                 loading: false,
-                user: {
-                    user: action.payload
-                }
+                user:  action.payload
             }
         case Actions.REGISTER_ERROR:
             return {
@@ -86,8 +89,7 @@ export const authReducer = (state = initialState, action: { type: string, payloa
         case Actions.UPDATE_TOKEN_SUCCESS:
             return {
                 ...state,
-                loading: false,
-                user: action.payload
+                loading: false
             }
         case Actions.UPDATE_TOKEN_ERROR:
             return {
@@ -144,7 +146,8 @@ export const authReducer = (state = initialState, action: { type: string, payloa
                 ...state,
                 loading: false
             }
-        default:
+        default: {
             return state
+        }
     }
 }

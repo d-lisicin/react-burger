@@ -1,7 +1,7 @@
 import React from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from 'react-redux'
-import { ITab } from '../../../utils/types'
+import { ITab } from '../../../utils/type'
 
 const BurgerIngredientsTab = () => {
     const current = useSelector((state: ITab) => state.activeTab)
@@ -37,5 +37,5 @@ const BurgerIngredientsTab = () => {
     )
 }
 
-export default BurgerIngredientsTab;
+export default BurgerIngredientsTab
 

@@ -1,7 +1,7 @@
 import React, { useRef , useEffect } from 'react'
 import BurgerIngredientItem from './burger-ingredient-item/burger-ingredient-item'
 import styles from './burger-ingredient.module.css'
-import Actions from '../../../services/actions'
+import * as Actions from '../../../store/actions'
 import { useDispatch } from 'react-redux'
 
 const BurgerIngredient = () => {
@@ -51,7 +51,7 @@ const BurgerIngredient = () => {
                 )
             })}
         </div>
-    );
+    )
 }
 
 export default BurgerIngredient

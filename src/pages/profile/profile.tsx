@@ -4,7 +4,7 @@ import styles from './profile.module.css'
 import { ProfileForm } from '../../components/profile/profile-form/profile-form'
 import Preloader from '../../components/preloader/preloader'
 import { useSelector } from 'react-redux'
-import { IProfile } from '../../utils/types'
+import { IProfile } from '../../utils/type'
 
 export const ProfilePage = () => {
     const profile = useSelector((state: IProfile) => state.profile)
@@ -14,7 +14,7 @@ export const ProfilePage = () => {
     }
 
     return (
-        <div className={`${styles.wrap} mt-30`}>
+        <div className={`${styles.wrap} mt-5`}>
             <ProfileNav />
             <ProfileForm />
         </div>

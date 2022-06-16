@@ -3,9 +3,9 @@ import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './register.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { registerUser } from '../../services/actions/auth'
+import { registerUser } from '../../store/actions/auth'
 import Preloader from '../../components/preloader/preloader'
-import { ILocation, IProfile } from '../../utils/types'
+import { ILocation, IProfile } from '../../utils/type'
 
 export const RegisterPage = () => {
     const dispatch = useDispatch()

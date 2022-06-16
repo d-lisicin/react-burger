@@ -1,8 +1,8 @@
 import React  from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import styles from './profile-nav.module.css'
-import { ILocation } from '../../../utils/types'
-import { logOut } from '../../../services/actions/auth'
+import { ILocation } from '../../../utils/type'
+import { logOut } from '../../../store/actions/auth'
 import { useDispatch } from 'react-redux'
 
 export const ProfileNav = () => {
@@ -18,7 +18,7 @@ export const ProfileNav = () => {
     }
 
     return (
-        <div className={ `${styles.wrap} ml-5 mr-15`}>
+        <div className={ `${styles.wrap} ml-5 mr-15 mt-25` }>
             <NavLink
                 to="/profile"
                 className={styles.link}

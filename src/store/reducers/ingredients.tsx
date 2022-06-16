@@ -1,12 +1,16 @@
-import Actions from '../actions'
-import { IIngredientsItem } from '../../utils/types'
+import * as Actions from '../actions'
+import { IIngredient } from '../../utils/type'
+import { TIngredientsActionTypes } from '../actions/ingredients'
 
-const initialState = {
+const initialState: IIngredient = {
     loading: false,
     items: []
 }
 
-export const ingredientsReducer = (state = initialState, action: { type: string, payload: IIngredientsItem }) => {
+export const ingredientsReducer = (
+    state = initialState,
+    action: TIngredientsActionTypes
+) => {
     switch (action.type) {
         case Actions.GET_INGREDIENTS_REQUEST: {
             return {
@@ -22,14 +26,15 @@ export const ingredientsReducer = (state = initialState, action: { type: string,
             }
         }
 
-        case Actions.POST_ORDER_ERROR: {
+        case Actions.GET_INGREDIENTS_ERROR: {
             return {
                 ...state,
                 loading: false
             }
         }
 
-        default:
+        default: {
             return state
+        }
     }
 }

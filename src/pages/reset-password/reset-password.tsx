@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './reset-password.module.css'
-import { resetPassword } from '../../services/actions/auth'
+import { resetPassword } from '../../store/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import Preloader from '../../components/preloader/preloader'
-import { ILocation, IProfile } from '../../utils/types'
+import { ILocation, IProfile } from '../../utils/type'
 
 export const ResetPasswordPage = () => {
     const dispatch = useDispatch()

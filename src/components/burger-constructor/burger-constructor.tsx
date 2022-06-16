@@ -5,17 +5,17 @@ import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-de
 import styles from './burger-constructor.module.css'
 import Modal from '../modal/modal'
 import {
-    IIngredient,
-    IIngredientConstructor,
+    IIngredientEl,
     IIngredientsItem,
-    IOrder,
-    IProfile
-} from '../../utils/types'
+    IOrderState,
+    IProfile,
+    TBurgerConstructor
+} from '../../utils/type'
 import OrderDetails from '../order-details/order-details'
-import Actions from '../../services/actions'
+import * as Actions from '../../store/actions'
 import BurgerConstructorItem from './burger-constructor-item/burger-constructor-item'
 import { v1 as uuidv4 } from 'uuid'
-import { postOrder } from '../../services/actions/order'
+import { postOrder } from '../../store/actions/order'
 import { useHistory } from 'react-router-dom'
 
 const totalPriceInitialState = { totalPrice: 0 }
@@ -35,9 +35,9 @@ const BurgerConstructor = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [ totalPriceState, totalPriceDispatcher ] = useReducer(totalPriceReducer, totalPriceInitialState, undefined)
-    const ingredients = useSelector((state: IIngredient) => state.ingredients.items)
-    const orderValue = useSelector((state: IOrder) => state.order.number)
-    const newBurger = useSelector((state: IIngredientConstructor) => state.newBurger.newBurger)
+    const ingredients = useSelector((state: IIngredientEl) => state.ingredients.items)
+    const orderValue = useSelector((state: IOrderState) => state.order.number)
+    const newBurger = useSelector((state: TBurgerConstructor) => state.newBurger.newBurger)
     const profile = useSelector((state: IProfile) => state.profile)
     const activeBun = newBurger.filter((e) => e.type === 'bun')[0]
     const activeIngridients = newBurger.filter((e) => e.type !== 'bun')
@@ -160,7 +160,7 @@ const BurgerConstructor = () => {
                 </Modal>
             }
         </>
-    );
+    )
 }
 
 export default BurgerConstructor

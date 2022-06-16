@@ -1,0 +1,26 @@
+.infoBlockWrap {
+    display: flex;
+}
+
+.infoBlock {
+    width: 100%;
+}
+
+.contentItem {
+    color: #00CCCC;
+}
+
+.timeContent {
+    text-shadow: 0 0 16px rgba(51, 51, 255, 0.25), 0 0 8px rgba(51, 51, 255, 0.25), 0 4px 32px rgba(51, 51, 255, 0.5);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 321px;
+}
+
+.title {
+    white-space: nowrap;
+}

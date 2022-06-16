@@ -2,8 +2,8 @@ import React, {useEffect, useRef, useState} from 'react'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './profile-form.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { editProfile } from '../../../services/actions/auth'
-import {IProfile, IProfileUser} from '../../../utils/types'
+import { editProfile } from '../../../store/actions/auth'
+import {IProfile, IProfileUser} from '../../../utils/type'
 
 export const ProfileForm = () => {
     const dispatch = useDispatch()
@@ -68,7 +68,7 @@ export const ProfileForm = () => {
 
     return (
         <form
-            className={styles.wrap}
+            className={`${styles.wrap} mt-25`}
             onSubmit={ saveProfile }
         >
             <div className={'mb-6'}>

@@ -3,10 +3,20 @@ import { useDrag, useDrop } from 'react-dnd'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-constructor-item.module.css'
 import { useDispatch } from 'react-redux'
-import Actions from '../../../services/actions'
-import { IHoverIngredient } from '../../../utils/types'
+import * as Actions from '../../../store/actions'
+import { IHoverIngredient } from '../../../utils/type'
 
-const BurgerConstructorItem = (props: { item: { _idNew: string, name: string, price: number, image: string }, index: number }) => {
+const BurgerConstructorItem = (
+    props: {
+        item: {
+            _idNew: string,
+            name: string,
+            price: number,
+            image: string
+        },
+        index: number
+    }
+) => {
     const dispatch = useDispatch()
     const ref = useRef<HTMLLIElement>(null)
     const ingredient = props.item

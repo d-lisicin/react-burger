@@ -3,9 +3,9 @@ import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './forgot-password.module.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { forgotPassword } from '../../services/actions/auth'
+import { forgotPassword } from '../../store/actions/auth'
 import Preloader from '../../components/preloader/preloader'
-import { ILocation, IProfile } from '../../utils/types'
+import { ILocation, IProfile } from '../../utils/type'
 
 export const ForgotPasswordPage = () => {
     const dispatch = useDispatch()

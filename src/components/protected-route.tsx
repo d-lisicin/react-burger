@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Redirect, Route, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { IProfile, IChildrenRoute } from '../utils/types'
+import { IProfile, IChildrenRoute } from '../utils/type'
 import { getTokens } from '../helpers/auth'
 
 export function ProtectedRoute({ children, ...rest }: IChildrenRoute) {

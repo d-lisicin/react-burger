@@ -1,11 +1,32 @@
-import Actions from './index'
+import * as Actions from './index'
 import { apiURL } from '../../utils/constants'
 import { checkResponse } from '../../helpers/api'
+import { AppDispatch } from '../../utils/type'
 
-export const postOrder = (ingredients: string[]) => (dispatch: (arg0: { type: string, payload?: number }) => void) => {
-    dispatch({
-        type: Actions.POST_ORDER_REQUEST
-    })
+export interface IPostOrderRequest {
+    readonly type: typeof Actions.POST_ORDER_REQUEST
+}
+
+export interface IPostOrderSuccess {
+    readonly type: typeof Actions.POST_ORDER_SUCCESS
+    readonly payload: number
+}
+
+export interface IPostOrderError {
+    readonly type: typeof Actions.POST_ORDER_ERROR
+    readonly payload: null | string
+}
+
+export interface IDeleteOrderNumber {
+    readonly type: typeof Actions.DELETE_ORDER_NUMBER
+}
+
+export type TOrderActionTypes =
+    | IPostOrderRequest | IPostOrderSuccess
+    | IPostOrderError | IDeleteOrderNumber
+
+export const postOrder = (ingredients: string[]) => (dispatch: AppDispatch) => {
+    dispatch({ type: Actions.POST_ORDER_REQUEST })
 
     fetch(`${apiURL}/api/orders`, {
         method: 'POST',

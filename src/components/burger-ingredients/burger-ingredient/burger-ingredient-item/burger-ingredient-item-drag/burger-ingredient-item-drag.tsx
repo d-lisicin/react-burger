@@ -3,10 +3,10 @@ import { useDrag } from 'react-dnd'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredient-item-drag.module.css'
 import { useSelector } from 'react-redux'
-import { IIngredientArr, IIngredientConstructor } from '../../../../../utils/types'
+import { IIngredientArr, TBurgerConstructor } from '../../../../../utils/type'
 
 const BurgerIngredientItemDrag = (props: IIngredientArr) => {
-    const newBurger = useSelector((state:IIngredientConstructor) => state.newBurger.newBurger)
+    const newBurger = useSelector((state: TBurgerConstructor) => state.newBurger.newBurger)
     const countIngredient = newBurger.filter((e) => e._id === props.ingredient._id).length
 
     const [{ opacity }, drag] = useDrag({
@@ -28,10 +28,14 @@ const BurgerIngredientItemDrag = (props: IIngredientArr) => {
                 alt={props.ingredient.name}
             />
             <div className={`${styles.price} mt-1 mb-1`}>
-                <p className='text text_type_digits-default mr-2'>{props.ingredient.price}</p>
+                <p className='text text_type_digits-default mr-2'>
+                    {props.ingredient.price}
+                </p>
                 <CurrencyIcon type="primary"/>
             </div>
-            <p className={`${styles.name} text text_type_main-default`}>{props.ingredient.name}</p>
+            <p className={`${styles.name} text text_type_main-default`}>
+                {props.ingredient.name}
+            </p>
             <Counter
                 count={ props.ingredient.type === 'bun' ? countIngredient * 2 : countIngredient }
                 size="default" />

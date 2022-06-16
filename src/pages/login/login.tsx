@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { checkUser, loginUser } from '../../services/actions/auth'
+import { checkUser, loginUser } from '../../store/actions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './login.module.css'
 import Preloader from '../../components/preloader/preloader'
 import { getTokens } from '../../helpers/auth'
-import { ILocation, IProfile } from '../../utils/types'
+import { ILocation, IProfile } from '../../utils/type'
 
 export const LoginPage = () => {
     const dispatch = useDispatch()

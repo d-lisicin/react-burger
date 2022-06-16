@@ -1,13 +1,17 @@
-import Actions from '../actions'
+import * as Actions from '../actions'
+import { IOrder } from '../../utils/type'
+import { TOrderActionTypes } from '../actions/order'
 
-const initialState = {
+const initialState: IOrder = {
     post: false,
     error: null,
     number: null
 }
 
-export const orderReducer = (state = initialState, action: { type: string, payload: number | string }) => {
-
+export const orderReducer = (
+    state = initialState,
+    action: TOrderActionTypes
+) => {
     switch (action.type) {
         case Actions.POST_ORDER_REQUEST:
             return {

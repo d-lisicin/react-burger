@@ -25,12 +25,12 @@ function AppHeader() {
                     </NavLink>
 
                     <NavLink
-                        to='/list'
+                        to='/feed'
                         className={`${styles.link} text text_type_main-default ml-5 mr-5`}
                         activeClassName={styles.linkActive}
                         exact
                     >
-                        <ListIcon type={activeIcon('/list')} />
+                        <ListIcon type={activeIcon('/feed')} />
                         <span className="pl-2">Лента заказов</span>
                     </NavLink>
                 </div>
