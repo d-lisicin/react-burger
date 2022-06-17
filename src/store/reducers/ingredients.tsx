@@ -8,9 +8,9 @@ const initialState: IIngredient = {
 }
 
 export const ingredientsReducer = (
-    state = initialState,
+    state: IIngredient = initialState,
     action: TIngredientsActionTypes
-) => {
+): IIngredient => {
     switch (action.type) {
         case Actions.GET_INGREDIENTS_REQUEST: {
             return {

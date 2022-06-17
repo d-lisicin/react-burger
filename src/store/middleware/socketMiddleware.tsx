@@ -11,21 +11,11 @@ export const socketMiddleware = (
         return next => action => {
             const { dispatch } = store
             const { type, payload } = action
-            const { onInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions
+            const { onInit, onOpen, onClose, onError, onMessage, wsSendMessage } = wsActions
+            const urlQueryItem = action.urlQuery
 
             if (type === onInit) {
-                const token = action.accessToken
-                let query = ''
-                let url = wsUrl
-
-                if (window.location.pathname.indexOf('/feed') === 0) {
-                    url = `${wsUrl}/all`
-                } else if (window.location.pathname.indexOf('/profile/orders') === 0) {
-                    url = `${wsUrl}`
-                    query = `?token=${token}`
-                }
-
-                socket = new WebSocket(`${url}${query}`)
+                socket = new WebSocket(`${wsUrl}${urlQueryItem}`)
             }
 
             if (socket) {

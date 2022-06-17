@@ -1,11 +1,10 @@
 import React from 'react'
 import styles from './orders-info.module.css'
-import { useSelector } from 'react-redux'
-import { TOrderViewWs, TWsGetState } from '../../utils/type'
+import { useSelector } from '../../store'
 
 function OrdersInfo() {
-    const ordersList = useSelector((state: TOrderViewWs) => state.ws.messages[0]?.orders)
-    const orderInfo = useSelector((state: TWsGetState) => state.ws.messages[0])
+    const ordersList = useSelector((state) => state.ws.messages[0]?.orders)
+    const orderInfo = useSelector((state) => state.ws.messages[0])
 
     const orderStatusDone = ordersList
         .filter((e) => e.status === 'done')

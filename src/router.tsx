@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from './store'
 import { Route, Switch, useLocation, useHistory } from 'react-router-dom'
 import { ProtectedRoute } from './components/protected-route'
 import * as Actions from './store/actions'
@@ -26,6 +26,7 @@ export function Router() {
     const history = useHistory()
     const dispatch = useDispatch()
     const ingredientId = location?.state && location.state.ingredientId
+    const ordersList = useSelector((state) => state.ws.messages)
 
     const closeModal = () => {
         history.goBack()
@@ -67,7 +68,7 @@ export function Router() {
                 </Route>
             )}
 
-            {ingredientId && (
+            {ordersList.length !== 0 &&ingredientId && (
                 <Route path="/feed/:id">
                     <Modal
                         title=''

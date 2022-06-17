@@ -1,7 +1,8 @@
 import * as Actions from './index'
 import { apiURL } from '../../utils/constants'
 import { checkResponse } from '../../helpers/api'
-import { AppDispatch } from '../../utils/type'
+import { TAppDispatch } from '../../utils/type'
+import {getTokens} from "../../helpers/auth";
 
 export interface IPostOrderRequest {
     readonly type: typeof Actions.POST_ORDER_REQUEST
@@ -25,12 +26,16 @@ export type TOrderActionTypes =
     | IPostOrderRequest | IPostOrderSuccess
     | IPostOrderError | IDeleteOrderNumber
 
-export const postOrder = (ingredients: string[]) => (dispatch: AppDispatch) => {
+export const postOrder = (ingredients: string[]) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.POST_ORDER_REQUEST })
+    const { accessToken } = getTokens()
 
     fetch(`${apiURL}/api/orders`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `${accessToken}`
+        },
         body: JSON.stringify({ ingredients })
     })
         .then(checkResponse)

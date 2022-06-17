@@ -9,7 +9,7 @@ const initialState: IIngredientConstructor = {
 export const ingredientsConstructorReducer = (
     state = initialState,
     action: TIngredientsConstructorActionTypes
-) => {
+): IIngredientConstructor => {
     switch (action.type) {
         case Actions.ADD_INGREDIENT:
             return {

@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './order-list.module.css'
 import OrderListItem from './order-list-item/order-list-item'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../store'
 import Preloader from '../preloader/preloader'
 import { TOrderView, TWsGetState } from '../../utils/type'
 
 function OrderList() {
-    const ordersInfo = useSelector((state: TWsGetState) => state.ws.messages[0])
-    const ordersConnected = useSelector((state: { ws: { wsConnected: boolean } }) => state.ws.wsConnected)
+    const ordersInfo = useSelector((state) => state.ws.messages[0])
+    const ordersConnected = useSelector((state) => state.ws.wsConnected)
     let notResult = false
 
     if (ordersConnected) {

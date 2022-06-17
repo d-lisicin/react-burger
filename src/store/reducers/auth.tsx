@@ -4,7 +4,14 @@ import { TAuthActionTypes } from '../actions/auth'
 
 const initialState: TAuthReducerState = {
     loading: false,
-    user: null,
+    user: {
+        success: false,
+        user: {
+            name: '',
+            email: '',
+            password: ''
+        }
+    },
     error: null,
     profileUpdate: false,
     isForgotSend: false,
@@ -25,7 +32,7 @@ export const authReducer = (
             return {
                 ...state,
                 loading: false,
-                user:  action.payload
+                user: action.payload
             }
         case Actions.REGISTER_ERROR:
             return {
@@ -139,7 +146,14 @@ export const authReducer = (
             return {
                 ...state,
                 loading: false,
-                user: null
+                user: {
+                    success: false,
+                    user: {
+                        name: '',
+                        email: '',
+                        password: ''
+                    }
+                }
             }
         case Actions.LOGOUT_ERROR:
             return {

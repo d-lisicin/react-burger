@@ -1,13 +1,13 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import styles from './ingredient-details.module.css'
-import { useSelector } from 'react-redux'
-import { IIngredientEl, IParamTypes } from '../../utils/type'
+import { useSelector } from '../../store'
+import { IParamTypes } from '../../utils/type'
 
 const IngredientDetails = () => {
     const { id } = useParams<IParamTypes>()
 
-    const ingredient = useSelector((state: IIngredientEl) => state.ingredients.items)
+    const ingredient = useSelector((state) => state.ingredients.items)
     const ingredientInfo = ingredient.find((e: { _id: string }) => e._id === id)
 
     return (

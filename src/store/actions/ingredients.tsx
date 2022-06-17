@@ -1,7 +1,7 @@
 import * as Actions from './index'
 import { apiURL } from '../../utils/constants'
 import { checkResponse } from '../../helpers/api'
-import { AppDispatch, IIngredientsItem } from '../../utils/type'
+import { TAppDispatch, IIngredientsItem } from '../../utils/type'
 
 export interface IGetIngredientsRequest {
     readonly type: typeof Actions.GET_INGREDIENTS_REQUEST
@@ -9,7 +9,7 @@ export interface IGetIngredientsRequest {
 
 export interface IGetIngredientsSuccess {
     readonly type: typeof Actions.GET_INGREDIENTS_SUCCESS
-    readonly payload: IIngredientsItem
+    readonly payload: IIngredientsItem[]
 }
 
 export interface IGetIngredientsError {
@@ -20,7 +20,7 @@ export type TIngredientsActionTypes =
     | IGetIngredientsRequest | IGetIngredientsSuccess
     | IGetIngredientsError
 
-export const getIngredients = () => (dispatch: AppDispatch) => {
+export const getIngredients = () => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.GET_INGREDIENTS_REQUEST })
 
     fetch(`${apiURL}/api/ingredients`)

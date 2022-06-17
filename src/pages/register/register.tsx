@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './register.module.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../store'
 import { registerUser } from '../../store/actions/auth'
 import Preloader from '../../components/preloader/preloader'
-import { ILocation, IProfile } from '../../utils/type'
+import { ILocation } from '../../utils/type'
 
 export const RegisterPage = () => {
     const dispatch = useDispatch()
     const location = useLocation<ILocation>()
-    const profile = useSelector((state: IProfile) => state.profile)
+    const profile = useSelector((state) => state.profile)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -21,7 +21,7 @@ export const RegisterPage = () => {
         dispatch(registerUser({ email, password, name }))
     }
 
-    if (!!profile.user) {
+    if (!!profile.user.success) {
         return <Redirect to={ location.state?.from || '/' } />
     }
 

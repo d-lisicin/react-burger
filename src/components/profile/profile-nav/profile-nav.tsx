@@ -3,7 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import styles from './profile-nav.module.css'
 import { ILocation } from '../../../utils/type'
 import { logOut } from '../../../store/actions/auth'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../../store'
 
 export const ProfileNav = () => {
     const location = useLocation<ILocation>()

@@ -9,9 +9,9 @@ const initialState: TWsState = {
 }
 
 export const websocketsReducer = (
-    state = initialState,
+    state: TWsState = initialState,
     action: TWsActions
-) => {
+): TWsState => {
     switch (action.type) {
         case Actions.WS_CONNECTION_REQUEST:
             return {
@@ -39,9 +39,7 @@ export const websocketsReducer = (
         case Actions.WS_GET_MESSAGE:
             return {
                 ...state,
-                messages: [
-                    action.payload
-                ]
+                messages: [...state.messages, action.payload]
             }
         default:
             return state

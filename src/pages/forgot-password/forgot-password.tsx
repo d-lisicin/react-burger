@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './forgot-password.module.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../store'
 import { forgotPassword } from '../../store/actions/auth'
 import Preloader from '../../components/preloader/preloader'
-import { ILocation, IProfile } from '../../utils/type'
+import { ILocation } from '../../utils/type'
 
 export const ForgotPasswordPage = () => {
     const dispatch = useDispatch()
     const location = useLocation<ILocation>()
-    const profile = useSelector((state: IProfile) => state.profile)
+    const profile = useSelector((state) => state.profile)
     const [email, setEmail] = useState('')
     const [notValidMessage, setnotValidMessage] = useState('')
 
@@ -30,7 +30,7 @@ export const ForgotPasswordPage = () => {
         return <Redirect to={ location.state?.from || '/reset-password' } />
     }
 
-    if (!!profile.user) {
+    if (!!profile.user.success) {
         return <Redirect to={ location.state?.from || '/' } />
     }
 

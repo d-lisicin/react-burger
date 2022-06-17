@@ -1,17 +1,18 @@
 import React from 'react'
 import styles from './feed-order-detail.module.css'
 import { replaceDate } from '../../utils/date'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../store'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useParams } from 'react-router-dom'
-import {IParamTypes, TOrderViewWs, IIngredientEl, IIngredientsItem } from '../../utils/type'
+import {IParamTypes, IIngredientsItem } from '../../utils/type'
 
 const FeedOrderDetail = () => {
     const { id } = useParams<IParamTypes>()
-    const orderState = useSelector((state: TOrderViewWs) => state.ws.messages[0].orders)
-    const ingredients = useSelector((state: IIngredientEl) => state.ingredients.items)
-    const order = orderState?.find((e) => e._id === id)
+    const orderState = useSelector((state) => state.ws.messages[0].orders)
+    const ingredients = useSelector((state) => state.ingredients.items)
+    const order = orderState.find((e) => e._id === id)
     const orderNotDuplicate = [...new Set(order?.ingredients.map((id) => id))]
+
     const orderInfo = orderNotDuplicate.map((orderIngredient) => {
         const ingredient = ingredients.find((ingredient) => ingredient._id === orderIngredient)
         const ingredientValue = order?.ingredients.filter((ingredientId) => ingredientId === ingredient?._id).length
@@ -27,7 +28,7 @@ const FeedOrderDetail = () => {
 
     const orderAllPrice = orderInfo
         .map((item) => item.allPrice)
-        .reduce((prev: number, curr: number) => prev + curr, 0)
+        .reduce((prev, curr) => prev + curr, 0)
 
     const statusName = (status: string) => {
         switch (status) {
@@ -52,7 +53,7 @@ const FeedOrderDetail = () => {
         <>
             { order &&
                 <div className={`${styles.wrap} mt-10 mr-10 mb-10 ml-10`}>
-                    <div className={`${styles.orderNumber} text text_type_digits-default mb-10`}>#{order?.number}</div>
+                    <div className={`${styles.orderNumber} text text_type_digits-default mb-10`}>#{order.number}</div>
                     <div className='text text_type_main-medium mb-3'>{order.name}</div>
                     <div className={`${styles.status} text text_type_main-default mb-15`}>{statusName(order.status)}</div>
                     <div className='text text_type_main-medium mb-6'>Состав</div>

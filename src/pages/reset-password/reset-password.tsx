@@ -3,14 +3,14 @@ import { Link, Redirect, useLocation } from 'react-router-dom'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './reset-password.module.css'
 import { resetPassword } from '../../store/actions/auth'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../store'
 import Preloader from '../../components/preloader/preloader'
-import { ILocation, IProfile } from '../../utils/type'
+import { ILocation } from '../../utils/type'
 
 export const ResetPasswordPage = () => {
     const dispatch = useDispatch()
     const location = useLocation<ILocation>()
-    const profile = useSelector((state: IProfile) => state.profile)
+    const profile = useSelector((state) => state.profile)
     const [password, setPassword] = useState('')
     const [mailCode, setMailCode] = useState('')
 
@@ -24,7 +24,7 @@ export const ResetPasswordPage = () => {
         return <Redirect to={ location.state?.from || '/forgot-password' } />
     }
 
-    if (!!profile.user) {
+    if (!!profile.user.success) {
         return <Redirect to={ location.state?.from || '/' } />
     }
 

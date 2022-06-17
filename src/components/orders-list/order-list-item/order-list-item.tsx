@@ -1,15 +1,15 @@
 import React from 'react'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './order-list-item.module.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../../store'
 import { replaceDate } from '../../../utils/date'
 import {useHistory, useLocation} from 'react-router-dom'
 import * as Actions from '../../../store/actions'
-import { TOrderView, IIngredientEl, IIngredientsItem } from '../../../utils/type'
+import { TOrderView, IIngredientsItem } from '../../../utils/type'
 
 function OrderListItem(orders: { orders: TOrderView }) {
     const orderItem = orders.orders
-    const ingredients = useSelector((state: IIngredientEl) => state.ingredients.items)
+    const ingredients = useSelector((state) => state.ingredients.items)
     const date = orderItem.createdAt
     const history = useHistory()
     const location = useLocation()

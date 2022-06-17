@@ -2,7 +2,7 @@ import { apiURL } from '../../utils/constants'
 import * as Actions from '../actions'
 import { checkResponse } from '../../helpers/api'
 import { getTokens, setTokens } from '../../helpers/auth'
-import { AppDispatch, IFormData } from '../../utils/type'
+import { TAppDispatch, IFormDataUser, IFormData } from '../../utils/type'
 import { deleteCookie } from '../../utils/cookies'
 
 export interface IRegisterRequest {
@@ -11,7 +11,7 @@ export interface IRegisterRequest {
 
 export interface IRegisterSuccess {
     readonly type: typeof Actions.REGISTER_SUCCESS
-    readonly payload: IFormData
+    readonly payload: IFormDataUser
 }
 
 export interface IRegisterError {
@@ -24,7 +24,7 @@ export interface ILoginRequest {
 
 export interface ILoginSuccess {
     readonly type: typeof Actions.LOGIN_SUCCESS
-    readonly payload: IFormData
+    readonly payload: IFormDataUser
 }
 
 export interface ILoginError {
@@ -37,7 +37,7 @@ export interface ICheckRequest {
 
 export interface ICheckSuccess {
     readonly type: typeof Actions.CHECK_SUCCESS
-    readonly payload: IFormData
+    readonly payload: IFormDataUser
 }
 
 export interface ICheckError {
@@ -50,7 +50,7 @@ export interface IEditRequest {
 
 export interface IEditSuccess {
     readonly type: typeof Actions.EDIT_SUCCESS
-    readonly payload: IFormData
+    readonly payload: IFormDataUser
 }
 
 export interface IEditError {
@@ -123,7 +123,7 @@ export type TAuthActionTypes =
     | IResetPasswordError | IResetLogoutRequest
     | IResetLogoutSuccess | IResetLogoutError
 
-export const registerUser = ( { email, password, name }: IFormData ) => (dispatch: AppDispatch) => {
+export const registerUser = ( { email, password, name }: IFormData ) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.REGISTER_REQUEST })
 
     fetch(`${apiURL}/api/auth/register`,{
@@ -141,7 +141,10 @@ export const registerUser = ( { email, password, name }: IFormData ) => (dispatc
 
                 dispatch({
                     type: Actions.REGISTER_SUCCESS,
-                    payload: { user: res.user }
+                    payload: {
+                        success: true,
+                        user: res.user
+                    }
                 })
             } else {
                 throw new Error('Something went wrong')
@@ -155,7 +158,7 @@ export const registerUser = ( { email, password, name }: IFormData ) => (dispatc
         })
 }
 
-export const loginUser = ({ email, password }: { email: string, password: string }) => (dispatch: AppDispatch) => {
+export const loginUser = ({ email, password }: { email: string, password: string }) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.LOGIN_REQUEST })
 
     fetch(`${apiURL}/api/auth/login`,{
@@ -187,7 +190,7 @@ export const loginUser = ({ email, password }: { email: string, password: string
         })
 }
 
-export const updateToken = () => (dispatch: AppDispatch) => {
+export const updateToken = () => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.UPDATE_TOKEN_REQUEST })
     const { refreshToken } = getTokens()
 
@@ -217,7 +220,7 @@ export const updateToken = () => (dispatch: AppDispatch) => {
         })
 }
 
-export const checkUser = () => (dispatch: AppDispatch) => {
+export const checkUser = () => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.CHECK_REQUEST })
     const { accessToken, refreshToken } = getTokens()
 
@@ -256,9 +259,10 @@ export const checkUser = () => (dispatch: AppDispatch) => {
         })
 }
 
-export const editProfile = ({ name, email, password }: IFormData) => (dispatch: AppDispatch) => {
+export const editProfile = (form: IFormData) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.EDIT_REQUEST })
     const { accessToken } = getTokens()
+    const { name, email, password } = form
 
     fetch(`${apiURL}/api/auth/user`,{
         method: 'PATCH',
@@ -287,7 +291,7 @@ export const editProfile = ({ name, email, password }: IFormData) => (dispatch: 
         })
 }
 
-export const forgotPassword = ({ email }: { email: string }) => (dispatch: AppDispatch) => {
+export const forgotPassword = ({ email }: { email: string }) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.FORGOT_REQUEST })
 
     fetch(`${apiURL}/api/password-reset`,{
@@ -314,7 +318,7 @@ export const forgotPassword = ({ email }: { email: string }) => (dispatch: AppDi
         })
 }
 
-export const resetPassword = ({ password, mailCode }: { password: string, mailCode: string }) => (dispatch: AppDispatch) => {
+export const resetPassword = ({ password, mailCode }: { password: string, mailCode: string }) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.RESET_PASSWORD_REQUEST })
 
     fetch(`${apiURL}/api/password-reset/reset`,{
@@ -341,7 +345,7 @@ export const resetPassword = ({ password, mailCode }: { password: string, mailCo
         })
 }
 
-export const logOut = () => (dispatch: AppDispatch) => {
+export const logOut = () => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.LOGOUT_REQUEST })
     const { refreshToken } = getTokens()
 

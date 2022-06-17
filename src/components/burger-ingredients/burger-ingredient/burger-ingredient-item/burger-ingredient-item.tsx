@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import styles from './burger-ingredient-item.module.css'
-import { IIngredientEl, IIngredientsItem } from '../../../../utils/type'
-import { useDispatch, useSelector } from 'react-redux'
+import { IIngredientsItem } from '../../../../utils/type'
+import { useDispatch, useSelector } from '../../../../store'
 import BurgerIngredientItemDrag from './burger-ingredient-item-drag/burger-ingredient-item-drag'
 import * as Actions from '../../../../store/actions'
 
@@ -14,9 +14,9 @@ const BurgerIngredientItem = (props: {
     const dispatch = useDispatch()
     const history = useHistory()
     const location = useLocation()
-    const ingredientsItem = useSelector((state: IIngredientEl) => state.ingredients.items)
+    const ingredientsItem = useSelector((state) => state.ingredients.items)
     const categoryRef = useRef<null | HTMLDivElement>(null)
-    const category = ingredientsItem.filter((el: { type: string }) => el.type === props.type)
+    const category = ingredientsItem.filter((el) => el.type === props.type)
 
     const openIngredientDetails = (item: IIngredientsItem) => {
         document.body.classList.add('overflow-hidden')

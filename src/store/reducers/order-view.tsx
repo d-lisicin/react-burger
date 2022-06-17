@@ -15,12 +15,14 @@ const initialState: TOrderView = {
 export const orderViewReducer = (
     state = initialState,
     action: TOrderViewActionTypes
-) => {
+): TOrderView => {
     switch (action.type) {
         case Actions.SET_ORDER_VIEW:
             return action.payload
         case Actions.DELETE_ORDER_VIEW:
-            return null
+            return {
+                ...state
+            }
         default:
             return state
     }

@@ -2,11 +2,11 @@ import React from 'react'
 import { useDrag } from 'react-dnd'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredient-item-drag.module.css'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../../../../store'
 import { IIngredientArr, TBurgerConstructor } from '../../../../../utils/type'
 
 const BurgerIngredientItemDrag = (props: IIngredientArr) => {
-    const newBurger = useSelector((state: TBurgerConstructor) => state.newBurger.newBurger)
+    const newBurger = useSelector((state) => state.newBurger.newBurger)
     const countIngredient = newBurger.filter((e) => e._id === props.ingredient._id).length
 
     const [{ opacity }, drag] = useDrag({

@@ -49,7 +49,7 @@ export interface IHoverIngredient {
 
 export interface IOrder {
     error: string | null
-    number: string | null
+    number: number | null
     post: boolean
 }
 
@@ -111,10 +111,7 @@ export interface IProfile {
         profileUpdate: boolean,
         user: {
             success: boolean,
-            user: {
-                email: string,
-                name: string
-            }
+            user: IFormData
         }
     }
 }
@@ -125,10 +122,19 @@ export interface IChildrenRoute {
     path: string
 }
 
-export interface IFormData {
-    name: string | null,
+export type IFormData = {
+    name: string,
     email: string,
     password: string
+}
+
+export type IFormDataUser = {
+    success: boolean
+    user: {
+        name: string,
+        email: string,
+        password: string
+    }
 }
 
 export interface IParamTypes {
@@ -145,21 +151,12 @@ export type TOrderView = {
     _id: string
 }
 
-export type TOrderViewWs = {
-    ws: {
-        messages: [{
-            orders: TOrderView[]
-        }]
-    }
-}
-
 export type TWsGet = {
     orders: TOrderView[],
     success: boolean,
     total: number,
     totalToday: number
 }
-
 
 export type TWsGetState = {
     ws: {
@@ -170,12 +167,12 @@ export type TWsGetState = {
 export type TWsState = {
     wsConnected: boolean,
     error: string | null,
-    messages: TWsState[]
+    messages: TWsGet[]
 }
 
 export type TAuthReducerState = {
     loading: boolean,
-    user: IFormData | null,
+    user: IFormDataUser
     error: string | boolean | null,
     profileUpdate: boolean,
     isForgotSend: boolean,
@@ -199,4 +196,5 @@ export type TAppActions =
     | TOrderActionTypes
 
 export type TRootState = ReturnType<typeof rootReducer>
-export type AppDispatch<TReturn = void> = typeof store.dispatch | ActionCreator<ThunkAction<TReturn, Action, TRootState, TAppActions>>
+export type TAppThunk<TReturn = void> = ActionCreator<ThunkAction<TReturn, Action, TRootState, TAppActions>>
+export type TAppDispatch = typeof store.dispatch | TAppThunk

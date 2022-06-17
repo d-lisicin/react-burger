@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-constructor-item.module.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../../store'
 import * as Actions from '../../../store/actions'
 import { IHoverIngredient } from '../../../utils/type'
 

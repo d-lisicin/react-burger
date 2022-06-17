@@ -11,7 +11,7 @@ const initialState: IOrder = {
 export const orderReducer = (
     state = initialState,
     action: TOrderActionTypes
-) => {
+): IOrder => {
     switch (action.type) {
         case Actions.POST_ORDER_REQUEST:
             return {

@@ -1,18 +1,17 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './profile-form.module.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from '../../../store'
 import { editProfile } from '../../../store/actions/auth'
-import {IProfile, IProfileUser} from '../../../utils/type'
 
 export const ProfileForm = () => {
     const dispatch = useDispatch()
     const nameRef = useRef<HTMLInputElement>(null)
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
-    const { user } = useSelector((state: IProfileUser) => state.profile.user)
-    const profile = useSelector((state: IProfile) => state.profile)
-    const [ form, setForm ] = useState({ email: user?.email, name: user?.name, password: '' })
+    const user = useSelector((state) => state.profile.user.user)
+    const profile = useSelector((state) => state.profile)
+    const [ form, setForm ] = useState({ email: user.email, name: user.name, password: '' })
     const [ disabled, setDisabled ] = useState({ email: true, name: true, password: true })
     const [ showButtons, setShowButtons ] = useState(false)
 

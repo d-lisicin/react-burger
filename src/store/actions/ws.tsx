@@ -20,7 +20,7 @@ interface IWsConnectionClosed {
 
 interface IWSGetMessage {
     readonly type: typeof Actions.WS_GET_MESSAGE
-    readonly payload: { messages: TWsGet }
+    readonly payload: TWsGet
 }
 
 export type TWsActions =
