@@ -1,11 +1,10 @@
 import React from 'react'
 import styles from './order-details.module.css'
 import img from '../../images/done.png'
-import { useSelector } from 'react-redux'
-import { IOrder } from '../../utils/types'
+import { useSelector } from '../../store'
 
 function OrderDetails() {
-    const orderValue = useSelector((state: IOrder) => state.order.number)
+    const orderValue = useSelector((state) => state.order.number)
 
     return (
         <div className={`${styles.wrap} mt-30 mb-30`}>

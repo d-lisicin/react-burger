@@ -1,16 +1,16 @@
-import Actions from '../actions'
+import * as Actions from '../actions'
+import { TActiveTabActionTypes } from '../actions/tabs'
 
 export const activeTabReducer = (
     state = 'bun',
-    action: {
-        type: String
-        payload: String
-    }) => {
+    action: TActiveTabActionTypes
+) => {
     switch (action.type) {
         case Actions.ACTIVE_TAB: {
             return action.payload
         }
-        default:
+        default: {
             return state
+        }
     }
 }

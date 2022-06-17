@@ -1,17 +1,16 @@
 import AppHeader from '../app-header/app-header'
 import { Router } from '../../router'
 import { useEffect } from 'react'
-import { getIngredients } from '../../services/actions/ingredients'
-import { useDispatch, useSelector } from 'react-redux'
+import { getIngredients } from '../../store/actions/ingredients'
+import { useDispatch, useSelector } from '../../store'
 import Preloader from '../preloader/preloader'
-import { checkUser } from '../../services/actions/auth'
-import { IIngredient } from '../../utils/types'
+import { checkUser } from '../../store/actions/auth'
 import { getTokens } from '../../helpers/auth'
 
 function App() {
     const dispatch = useDispatch()
-    const ingredients = !!useSelector((state: IIngredient) => state.ingredients.items)
-    const isIngredientsLoad = useSelector((state: { ingredients: { loading: boolean } }) => state.ingredients.loading)
+    const ingredients = !!useSelector((state) => state.ingredients.items)
+    const isIngredientsLoad = useSelector((state) => state.ingredients.loading)
     const { accessToken, refreshToken } = getTokens()
 
     useEffect(() => {

@@ -1,9 +1,12 @@
-import Actions from '../actions'
-import { IIngredientsItem } from '../../utils/types'
+import * as Actions from '../actions'
+import { TIngredientViewActionTypes } from '../actions/ingredient-view'
 
 const initialState = {}
 
-export const ingredientViewReducer = (state = initialState, action: { type: string, payload: IIngredientsItem }) => {
+export const ingredientViewReducer = (
+    state = initialState,
+    action: TIngredientViewActionTypes
+) => {
     switch (action.type) {
         case Actions.SET_INGREDIENT_VIEW:
             return {

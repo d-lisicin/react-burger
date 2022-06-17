@@ -1,11 +1,129 @@
 import { apiURL } from '../../utils/constants'
-import Actions from './index'
+import * as Actions from '../actions'
 import { checkResponse } from '../../helpers/api'
 import { getTokens, setTokens } from '../../helpers/auth'
-import { IFormData } from '../../utils/types'
+import { TAppDispatch, IFormDataUser, IFormData } from '../../utils/type'
 import { deleteCookie } from '../../utils/cookies'
 
-export const registerUser = ( { email, password, name }: IFormData ) => (dispatch: (arg0: { type: string, payload?: IFormData }) => void) => {
+export interface IRegisterRequest {
+    readonly type: typeof Actions.REGISTER_REQUEST
+}
+
+export interface IRegisterSuccess {
+    readonly type: typeof Actions.REGISTER_SUCCESS
+    readonly payload: IFormDataUser
+}
+
+export interface IRegisterError {
+    readonly type: typeof Actions.REGISTER_ERROR
+}
+
+export interface ILoginRequest {
+    readonly type: typeof Actions.LOGIN_REQUEST
+}
+
+export interface ILoginSuccess {
+    readonly type: typeof Actions.LOGIN_SUCCESS
+    readonly payload: IFormDataUser
+}
+
+export interface ILoginError {
+    readonly type: typeof Actions.LOGIN_ERROR
+}
+
+export interface ICheckRequest {
+    readonly type: typeof Actions.CHECK_REQUEST
+}
+
+export interface ICheckSuccess {
+    readonly type: typeof Actions.CHECK_SUCCESS
+    readonly payload: IFormDataUser
+}
+
+export interface ICheckError {
+    readonly type: typeof Actions.CHECK_ERROR
+}
+
+export interface IEditRequest {
+    readonly type: typeof Actions.EDIT_REQUEST
+}
+
+export interface IEditSuccess {
+    readonly type: typeof Actions.EDIT_SUCCESS
+    readonly payload: IFormDataUser
+}
+
+export interface IEditError {
+    readonly type: typeof Actions.EDIT_ERROR
+}
+
+export interface IUpdateTokenRequest {
+    readonly type: typeof Actions.UPDATE_TOKEN_REQUEST
+}
+
+export interface IUpdateTokenSuccess {
+    readonly type: typeof Actions.UPDATE_TOKEN_SUCCESS
+}
+
+export interface IUpdateTokenError {
+    readonly type: typeof Actions.UPDATE_TOKEN_ERROR
+}
+
+export interface IForgotRequest {
+    readonly type: typeof Actions.FORGOT_REQUEST
+}
+
+export interface IForgotSuccess {
+    readonly type: typeof Actions.FORGOT_SUCCESS
+    readonly payload: boolean
+}
+
+export interface IForgotError {
+    readonly type: typeof Actions.FORGOT_ERROR
+    readonly payload: boolean
+}
+
+export interface IResetPasswordRequest {
+    readonly type: typeof Actions.RESET_PASSWORD_REQUEST
+}
+
+export interface IResetPasswordSuccess {
+    readonly type: typeof Actions.RESET_PASSWORD_SUCCESS
+    readonly payload: string
+}
+
+export interface IResetPasswordError {
+    readonly type: typeof Actions.RESET_PASSWORD_ERROR
+    readonly payload: string
+}
+
+export interface IResetLogoutRequest {
+    readonly type: typeof Actions.LOGOUT_REQUEST
+}
+
+export interface IResetLogoutSuccess {
+    readonly type: typeof Actions.LOGOUT_SUCCESS
+}
+
+export interface IResetLogoutError {
+    readonly type: typeof Actions.LOGOUT_ERROR
+}
+
+export type TAuthActionTypes =
+    | IRegisterRequest | IRegisterSuccess
+    | IRegisterError | ILoginRequest
+    | ILoginSuccess | ILoginError
+    | ICheckRequest | ICheckSuccess
+    | ICheckError | IEditRequest
+    | IEditSuccess | IEditError
+    | IUpdateTokenRequest | IUpdateTokenSuccess
+    | IUpdateTokenError | IForgotRequest
+    | IForgotSuccess | IForgotError
+    | IResetPasswordRequest | IResetPasswordSuccess
+    | IResetPasswordError | IResetLogoutRequest
+    | IResetLogoutSuccess | IResetLogoutError
+
+export const registerUser = ( { email, password, name }: IFormData ) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.REGISTER_REQUEST })
 
     fetch(`${apiURL}/api/auth/register`,{
@@ -23,7 +141,10 @@ export const registerUser = ( { email, password, name }: IFormData ) => (dispatc
 
                 dispatch({
                     type: Actions.REGISTER_SUCCESS,
-                    payload: res.user
+                    payload: {
+                        success: true,
+                        user: res.user
+                    }
                 })
             } else {
                 throw new Error('Something went wrong')
@@ -37,7 +158,7 @@ export const registerUser = ( { email, password, name }: IFormData ) => (dispatc
         })
 }
 
-export const loginUser = ({ email, password }: { email: string, password: string }) => (dispatch: (arg0: { type: string, payload?: { email: string, password: string } }) => void) => {
+export const loginUser = ({ email, password }: { email: string, password: string }) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.LOGIN_REQUEST })
 
     fetch(`${apiURL}/api/auth/login`,{
@@ -69,7 +190,7 @@ export const loginUser = ({ email, password }: { email: string, password: string
         })
 }
 
-export const updateToken = () => (dispatch: (arg0: { type: string, payload?: string }) => void) => {
+export const updateToken = () => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.UPDATE_TOKEN_REQUEST })
     const { refreshToken } = getTokens()
 
@@ -84,9 +205,7 @@ export const updateToken = () => (dispatch: (arg0: { type: string, payload?: str
                 const accessToken = res.accessToken
                 const refreshToken = res.refreshToken
 
-                dispatch({
-                    type: Actions.UPDATE_TOKEN_SUCCESS
-                })
+                dispatch({ type: Actions.UPDATE_TOKEN_SUCCESS })
 
                 setTokens({ accessToken, refreshToken })
             } else {
@@ -101,7 +220,7 @@ export const updateToken = () => (dispatch: (arg0: { type: string, payload?: str
         })
 }
 
-export const checkUser = () => (dispatch: any) => {
+export const checkUser = () => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.CHECK_REQUEST })
     const { accessToken, refreshToken } = getTokens()
 
@@ -140,9 +259,10 @@ export const checkUser = () => (dispatch: any) => {
         })
 }
 
-export const editProfile = ({ name, email, password }: IFormData) => (dispatch: (arg0: { type: string, payload?: IFormData }) => void) => {
+export const editProfile = (form: IFormData) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.EDIT_REQUEST })
     const { accessToken } = getTokens()
+    const { name, email, password } = form
 
     fetch(`${apiURL}/api/auth/user`,{
         method: 'PATCH',
@@ -171,7 +291,7 @@ export const editProfile = ({ name, email, password }: IFormData) => (dispatch: 
         })
 }
 
-export const forgotPassword = ({ email }: { email: string }) => (dispatch: (arg0: { type: string, payload?: boolean }) => void) => {
+export const forgotPassword = ({ email }: { email: string }) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.FORGOT_REQUEST })
 
     fetch(`${apiURL}/api/password-reset`,{
@@ -198,7 +318,7 @@ export const forgotPassword = ({ email }: { email: string }) => (dispatch: (arg0
         })
 }
 
-export const resetPassword = ({ password, mailCode }: { password: string, mailCode: string }) => (dispatch: (arg0: { type: string, payload?: string }) => void) => {
+export const resetPassword = ({ password, mailCode }: { password: string, mailCode: string }) => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.RESET_PASSWORD_REQUEST })
 
     fetch(`${apiURL}/api/password-reset/reset`,{
@@ -225,7 +345,7 @@ export const resetPassword = ({ password, mailCode }: { password: string, mailCo
         })
 }
 
-export const logOut = () => (dispatch: (arg0: { type: string, payload?: string }) => void) => {
+export const logOut = () => (dispatch: TAppDispatch) => {
     dispatch({ type: Actions.LOGOUT_REQUEST })
     const { refreshToken } = getTokens()
 
