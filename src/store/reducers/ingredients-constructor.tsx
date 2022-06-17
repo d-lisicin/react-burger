@@ -1,11 +1,15 @@
-import Actions from '../actions'
-import { IDragHoverIndex, IIngredientsItem, TActionConstructor } from '../../utils/types'
+import * as Actions from '../actions'
+import { IIngredientConstructor } from '../../utils/type'
+import { TIngredientsConstructorActionTypes } from '../actions/ingredients-constructor'
 
-const initialState = {
+const initialState: IIngredientConstructor = {
     newBurger: []
 }
 
-export const ingredientsConstructorReducer = (state: { newBurger: IIngredientsItem[] } = initialState, action: TActionConstructor) => {
+export const ingredientsConstructorReducer = (
+    state = initialState,
+    action: TIngredientsConstructorActionTypes
+): IIngredientConstructor => {
     switch (action.type) {
         case Actions.ADD_INGREDIENT:
             return {
@@ -17,7 +21,7 @@ export const ingredientsConstructorReducer = (state: { newBurger: IIngredientsIt
             }
 
         case Actions.ADD_BUN: {
-            const payloadData = action.payload as IIngredientsItem
+            const payloadData = action.payload
             const replaceNewBurger = [...state.newBurger]
             const indexItem = state.newBurger.findIndex((e: { type: string }) => e.type === 'bun')
 
@@ -34,7 +38,7 @@ export const ingredientsConstructorReducer = (state: { newBurger: IIngredientsIt
         }
 
         case Actions.REMOVE_INGREDIENT: {
-            const payloadData = action.payload as IIngredientsItem
+            const payloadData = action.payload
             const replaceNewBurger = [...state.newBurger]
             const ingredientId = payloadData._idNew
             const indexItem = state.newBurger.findIndex((e: { _idNew: string }) => e._idNew === ingredientId)
@@ -48,11 +52,8 @@ export const ingredientsConstructorReducer = (state: { newBurger: IIngredientsIt
         }
 
         case Actions.CHANGE_INGREDIENT_POSITION: {
-            const payloadData = action.payload as IDragHoverIndex
+            const { dragIndex, hoverIndex } = action.payload
             const replaceNewBurger = [...state.newBurger]
-            const dragIndex = payloadData.dragIndex
-            const hoverIndex = payloadData.hoverIndex
-
             const draggedItemIndex = replaceNewBurger.findIndex((ingredient: { _idNew: string }) => ingredient._idNew === dragIndex)
             const hoveredItemIndex = replaceNewBurger.findIndex((ingredient: { _idNew: string }) => ingredient._idNew === hoverIndex)
             const draggedItem = replaceNewBurger[draggedItemIndex]

@@ -1,22 +1,17 @@
 import React, { useEffect, useReducer } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from '../../store'
 import { useDrop } from 'react-dnd'
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-constructor.module.css'
 import Modal from '../modal/modal'
-import {
-    IIngredient,
-    IIngredientConstructor,
-    IIngredientsItem,
-    IOrder,
-    IProfile
-} from '../../utils/types'
+import { IIngredientsItem } from '../../utils/type'
 import OrderDetails from '../order-details/order-details'
-import Actions from '../../services/actions'
+import * as Actions from '../../store/actions'
 import BurgerConstructorItem from './burger-constructor-item/burger-constructor-item'
 import { v1 as uuidv4 } from 'uuid'
-import { postOrder } from '../../services/actions/order'
+import { postOrder } from '../../store/actions/order'
 import { useHistory } from 'react-router-dom'
+import Preloader from "../preloader/preloader";
 
 const totalPriceInitialState = { totalPrice: 0 }
 
@@ -35,10 +30,11 @@ const BurgerConstructor = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const [ totalPriceState, totalPriceDispatcher ] = useReducer(totalPriceReducer, totalPriceInitialState, undefined)
-    const ingredients = useSelector((state: IIngredient) => state.ingredients.items)
-    const orderValue = useSelector((state: IOrder) => state.order.number)
-    const newBurger = useSelector((state: IIngredientConstructor) => state.newBurger.newBurger)
-    const profile = useSelector((state: IProfile) => state.profile)
+    const { items } = useSelector((state) => state.ingredients)
+    const orderValue = useSelector((state) => state.order.number)
+    const orderLoader = useSelector((state) => state.order.post)
+    const newBurger = useSelector((state) => state.newBurger.newBurger)
+    const profile = useSelector((state) => state.profile)
     const activeBun = newBurger.filter((e) => e.type === 'bun')[0]
     const activeIngridients = newBurger.filter((e) => e.type !== 'bun')
     const orderId = newBurger.map((i: { _id: string }) => i._id)
@@ -47,7 +43,7 @@ const BurgerConstructor = () => {
         .reduce((prev: number, curr: number) => prev + curr, 0) + (activeBun?.price)
 
     useEffect(() => {
-        if (ingredients) {
+        if (items) {
             totalPriceDispatcher({
                 type: 'set',
                 value: totalPrice
@@ -59,7 +55,7 @@ const BurgerConstructor = () => {
             })
         }
 
-    }, [ingredients, totalPrice, totalPriceDispatcher])
+    }, [items, totalPrice, totalPriceDispatcher])
 
     const dropIngredient = (ingredient: IIngredientsItem) => {
         ingredient.type === 'bun' ?
@@ -76,7 +72,7 @@ const BurgerConstructor = () => {
     })
 
     const sendOrder = async () => {
-        if (activeBun && !!profile.user) {
+        if (activeBun && !!profile.user.success) {
             dispatch(postOrder(orderId))
             document.body.classList.add('overflow-hidden')
         } else {
@@ -91,6 +87,9 @@ const BurgerConstructor = () => {
 
     return (
         <>
+            {orderLoader &&
+                <Preloader />
+            }
             <section
                 className={`${styles.section} mt-15`}
             >
@@ -160,7 +159,7 @@ const BurgerConstructor = () => {
                 </Modal>
             }
         </>
-    );
+    )
 }
 
 export default BurgerConstructor
