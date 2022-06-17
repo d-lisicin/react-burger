@@ -8,7 +8,8 @@ export function ProtectedRoute({ children, ...rest }: IChildrenRoute) {
     const dispatch = useDispatch()
     const history = useHistory()
     const profile = useSelector((state) => state.profile)
-    const { refreshToken } = getTokens()
+    const { refreshToken, accessToken } = getTokens()
+    const checkToken = !!refreshToken && !!accessToken
 
     useEffect(() => {
         if (!refreshToken && !profile.user.success) {
@@ -21,7 +22,7 @@ export function ProtectedRoute({ children, ...rest }: IChildrenRoute) {
             <Route
                 {...rest}
                 render={({ location }) =>
-                    profile.user.success ?
+                    checkToken || profile.user.success ?
                         children : (
                             <Redirect
                                 to={{

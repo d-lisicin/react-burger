@@ -17,7 +17,7 @@ export const FeedOrderPage = () => {
             if (!ws.wsConnected) {
                 dispatch({
                     type: Actions.WS_CONNECTION_REQUEST,
-                    urlQuery: `?token=${token}`
+                    urlQuery: '/all'
                 })
             }
 

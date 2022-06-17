@@ -15,11 +15,13 @@ function OrderListItem(orders: { orders: TOrderView }) {
     const location = useLocation()
     const dispatch = useDispatch()
 
-
     const openOrderDetails = (item: TOrderView) => {
+        const routeModal = location.pathname.includes('feed') ? 'feed' : 'profile/orders'
+
         document.body.classList.add('overflow-hidden')
+
         history.push({
-            pathname: `/feed/${item._id}`,
+            pathname: `/${routeModal}/${item._id}`,
             state: {
                 ingredientId: location
             }

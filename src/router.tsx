@@ -49,10 +49,12 @@ export function Router() {
                 <ProtectedRoute exact path="/profile/orders">
                     <ProfileOrdersPage />
                 </ProtectedRoute>
+                <ProtectedRoute exact path="/profile/orders/:id">
+                    <FeedOrderPage />
+                </ProtectedRoute>
                 <Route exact path="/ingredients/:id" component={ IngredientsPage } />
                 <Route exact path="/feed" component={ Feed } />
                 <Route exact path="/feed/:id" component={ FeedOrderPage } />
-
                 <Route>
                     <NotFoundPage />
                 </Route>
@@ -68,7 +70,18 @@ export function Router() {
                 </Route>
             )}
 
-            {ordersList.length !== 0 &&ingredientId && (
+            {ordersList.length !== 0 && ingredientId && (
+                <Route path="/profile/orders/:id">
+                    <Modal
+                        title=''
+                        onClick={ closeModal }
+                    >
+                        <FeedOrderDetail />
+                    </Modal>
+                </Route>
+            )}
+
+            {ordersList.length !== 0 && ingredientId && (
                 <Route path="/feed/:id">
                     <Modal
                         title=''

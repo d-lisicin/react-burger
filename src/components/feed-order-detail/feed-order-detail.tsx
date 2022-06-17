@@ -4,17 +4,17 @@ import { replaceDate } from '../../utils/date'
 import { useSelector } from '../../store'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useParams } from 'react-router-dom'
-import {IParamTypes, IIngredientsItem } from '../../utils/type'
+import { IParamTypes, IIngredientsItem } from '../../utils/type'
 
 const FeedOrderDetail = () => {
     const { id } = useParams<IParamTypes>()
     const orderState = useSelector((state) => state.ws.messages[0].orders)
     const ingredients = useSelector((state) => state.ingredients.items)
-    const order = orderState.find((e) => e._id === id)
+    const order = orderState?.find((e) => e._id === id)
     const orderNotDuplicate = [...new Set(order?.ingredients.map((id) => id))]
 
     const orderInfo = orderNotDuplicate.map((orderIngredient) => {
-        const ingredient = ingredients.find((ingredient) => ingredient._id === orderIngredient)
+        const ingredient = ingredients?.find((ingredient) => ingredient._id === orderIngredient)
         const ingredientValue = order?.ingredients.filter((ingredientId) => ingredientId === ingredient?._id).length
 
         return ((ingredient === undefined) || (ingredientValue === undefined))
