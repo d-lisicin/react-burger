@@ -3,7 +3,7 @@ import styles from './order-list.module.css'
 import OrderListItem from './order-list-item/order-list-item'
 import { useSelector } from '../../store'
 import Preloader from '../preloader/preloader'
-import { TOrderView, TWsGetState } from '../../utils/type'
+import { TOrderView } from '../../utils/type'
 
 function OrderList() {
     const ordersInfo = useSelector((state) => state.ws.messages[0])

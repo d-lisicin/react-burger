@@ -1,8 +1,8 @@
-import * as Actions from '../actions'
-import { IOrder } from '../../utils/type'
-import { TOrderActionTypes } from '../actions/order'
+import * as Actions from '../../actions'
+import { IOrder } from '../../../utils/type'
+import { TOrderActionTypes } from '../../actions/order'
 
-const initialState: IOrder = {
+export const initialState: IOrder = {
     post: false,
     error: null,
     number: null

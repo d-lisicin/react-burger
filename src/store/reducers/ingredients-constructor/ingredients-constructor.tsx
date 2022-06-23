@@ -1,8 +1,8 @@
-import * as Actions from '../actions'
-import { IIngredientConstructor } from '../../utils/type'
-import { TIngredientsConstructorActionTypes } from '../actions/ingredients-constructor'
+import * as Actions from '../../actions'
+import { IIngredientConstructor } from '../../../utils/type'
+import { TIngredientsConstructorActionTypes } from '../../actions/ingredients-constructor'
 
-const initialState: IIngredientConstructor = {
+export const initialState: IIngredientConstructor = {
     newBurger: []
 }
 

@@ -32,6 +32,7 @@ const Modal = (
                 }
                 <button
                     className={styles.close}
+                    data-test="modal-close"
                     onClick={props.onClick}
                 >
                     <CloseIcon type="primary" />

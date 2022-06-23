@@ -1,8 +1,8 @@
-import * as Actions from '../actions'
-import { TAuthReducerState } from '../../utils/type'
-import { TAuthActionTypes } from '../actions/auth'
+import * as Actions from '../../actions'
+import { TAuthReducerState } from '../../../utils/type'
+import { TAuthActionTypes } from '../../actions/auth'
 
-const initialState: TAuthReducerState = {
+export const initialState: TAuthReducerState = {
     loading: false,
     user: {
         success: false,

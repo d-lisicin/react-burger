@@ -1,7 +1,6 @@
 import React from 'react'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useSelector } from '../../../store'
-import { ITab } from '../../../utils/type'
 
 const BurgerIngredientsTab = () => {
     const current = useSelector((state) => state.activeTab)

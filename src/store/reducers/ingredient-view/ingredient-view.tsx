@@ -1,7 +1,7 @@
-import * as Actions from '../actions'
-import { TIngredientViewActionTypes } from '../actions/ingredient-view'
+import * as Actions from '../../actions'
+import { TIngredientViewActionTypes } from '../../actions/ingredient-view'
 
-const initialState = {}
+export const initialState = {}
 
 export const ingredientViewReducer = (
     state = initialState,

@@ -96,6 +96,7 @@ const BurgerConstructor = () => {
                 <div
                     className={`${styles.inner} mb-10`}
                     ref={ dropTarget }
+                    data-test="ingredient-drop"
                 >
                     { activeBun && (
                         <ConstructorElement

@@ -128,6 +128,13 @@ export type IFormData = {
     password: string
 }
 
+export type IUserData = {
+    user: {
+        name: string,
+        email: string
+    }
+}
+
 export type IFormDataUser = {
     success: boolean
     user: {

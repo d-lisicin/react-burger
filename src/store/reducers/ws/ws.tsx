@@ -1,8 +1,8 @@
-import * as Actions from '../actions'
-import { TWsActions } from '../actions/ws'
-import { TWsState } from '../../utils/type'
+import * as Actions from '../../actions'
+import { TWsActions } from '../../actions/ws'
+import { TWsState } from '../../../utils/type'
 
-const initialState: TWsState = {
+export const initialState: TWsState = {
     wsConnected: false,
     error: null,
     messages: []
