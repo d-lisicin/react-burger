@@ -45,6 +45,7 @@ export const LoginPage = () => {
                     <Input
                         value={ email }
                         type="text"
+                        name={'email'}
                         placeholder="email"
                         onChange={e => setEmail(e.target.value)}
                     />

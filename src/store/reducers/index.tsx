@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import { ingredientsReducer } from './ingredients'
-import { activeTabReducer } from './tabs'
-import { ingredientsConstructorReducer } from './ingredients-constructor'
-import { ingredientViewReducer } from './ingredient-view'
-import { orderViewReducer } from './order-view'
-import { orderReducer } from './order'
-import { authReducer } from './auth'
-import { websocketsReducer } from './ws'
+import { ingredientsReducer } from './ingredients/ingredients'
+import { activeTabReducer } from './tabs/tabs'
+import { ingredientsConstructorReducer } from './ingredients-constructor/ingredients-constructor'
+import { ingredientViewReducer } from './ingredient-view/ingredient-view'
+import { orderViewReducer } from './order-view/order-view'
+import { orderReducer } from './order/order'
+import { authReducer } from './auth/auth'
+import { websocketsReducer } from './ws/ws'
 
 export const rootReducer = combineReducers({
     ingredients: ingredientsReducer,

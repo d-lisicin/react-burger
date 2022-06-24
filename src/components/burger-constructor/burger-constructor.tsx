@@ -91,11 +91,12 @@ const BurgerConstructor = () => {
                 <Preloader />
             }
             <section
-                className={`${styles.section} mt-15`}
+                className={`${styles.section} mt-15 burger-constructor`}
             >
                 <div
                     className={`${styles.inner} mb-10`}
                     ref={ dropTarget }
+                    data-test="ingredient-drop"
                 >
                     { activeBun && (
                         <ConstructorElement

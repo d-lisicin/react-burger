@@ -1,5 +1,7 @@
-import * as Actions from '../actions'
-import { TActiveTabActionTypes } from '../actions/tabs'
+import * as Actions from '../../actions'
+import { TActiveTabActionTypes } from '../../actions/tabs'
+
+export const initialState: string = 'bun'
 
 export const activeTabReducer = (
     state = 'bun',

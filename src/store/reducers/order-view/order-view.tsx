@@ -1,8 +1,8 @@
-import * as Actions from '../actions'
-import { TOrderViewActionTypes } from '../actions/order-view'
-import { TOrderView } from '../../utils/type'
+import * as Actions from '../../actions'
+import { TOrderViewActionTypes } from '../../actions/order-view'
+import { TOrderView } from '../../../utils/type'
 
-const initialState: TOrderView = {
+export const initialState: TOrderView = {
     createdAt: '',
     ingredients: [],
     name: '',

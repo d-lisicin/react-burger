@@ -1,8 +1,8 @@
-import * as Actions from '../actions'
-import { IIngredient } from '../../utils/type'
-import { TIngredientsActionTypes } from '../actions/ingredients'
+import * as Actions from '../../actions'
+import { IIngredient } from '../../../utils/type'
+import { TIngredientsActionTypes } from '../../actions/ingredients'
 
-const initialState: IIngredient = {
+export const initialState: IIngredient = {
     loading: false,
     items: []
 }

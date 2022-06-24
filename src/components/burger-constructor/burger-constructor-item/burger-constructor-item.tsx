@@ -82,6 +82,7 @@ const BurgerConstructorItem = (
             ref={ref}
             className={styles.wrap}
             style={{ opacity: isDragging }}
+
         >
             <span className={styles.icon}>
                 <DragIcon type="primary" />

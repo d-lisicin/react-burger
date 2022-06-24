@@ -39,6 +39,7 @@ const BurgerIngredientItem = (props: {
                     <li
                         key={item._id}
                         className={`${styles.item} mt-6`}
+                        data-test="ingredient-item"
                         onClick={() => { openIngredientDetails(item) }}
                     >
                         <BurgerIngredientItemDrag ingredient={ item } />

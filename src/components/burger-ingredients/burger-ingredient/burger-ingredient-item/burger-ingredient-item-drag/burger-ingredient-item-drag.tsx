@@ -3,7 +3,7 @@ import { useDrag } from 'react-dnd'
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import styles from './burger-ingredient-item-drag.module.css'
 import { useSelector } from '../../../../../store'
-import { IIngredientArr, TBurgerConstructor } from '../../../../../utils/type'
+import { IIngredientArr } from '../../../../../utils/type'
 
 const BurgerIngredientItemDrag = (props: IIngredientArr) => {
     const newBurger = useSelector((state) => state.newBurger.newBurger)
@@ -21,6 +21,7 @@ const BurgerIngredientItemDrag = (props: IIngredientArr) => {
         <div
             ref={drag}
             style={{opacity}}
+            data-test={`ingredient-drag--${props.ingredient.type}`}
         >
             <img
                 className='ml-4 mr-4'
