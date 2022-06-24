@@ -52,10 +52,10 @@ describe('Проверка страницы "Конструктор"', () => {
         cy.get('input[name="password"]').type(password)
         cy.get('form button').click()
 
-        cy.get('.button_button__odsYf').click()
+        cy.get('.burger-constructor button').click()
 
         cy.get('[data-test="modal-close"]', {
-            timeout: 500000000
+            timeout: 5000000000
         }).click()
     })
 })

@@ -91,7 +91,7 @@ const BurgerConstructor = () => {
                 <Preloader />
             }
             <section
-                className={`${styles.section} mt-15`}
+                className={`${styles.section} mt-15 burger-constructor`}
             >
                 <div
                     className={`${styles.inner} mb-10`}
